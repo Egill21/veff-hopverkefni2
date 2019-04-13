@@ -1,4 +1,44 @@
 @import '../../config.scss';
 
+// TODO laga þetta extra sem kemur neðst á headerinn útaf linkunum
+
 .header {
+  background: $color-font;
+  padding: $gutter;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-family: $font-heading;
+  }
+
+  &__titleLink {
+    color: $color-background;
+    text-decoration: none;
+  }
+
+  &__navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: $gutter * 8;
+    color: $color-background;
+    font-family: $font-main;
+  }
+
+  &__link {
+    margin: 0 $gutter / 2 $gutter / 4;
+    color: $color-background;
+    text-decoration: none;
+  }
+}
+
+.selected {
+  color: $color-background;
+  text-decoration: none;
+  font-weight: bold;
 }
