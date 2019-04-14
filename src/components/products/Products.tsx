@@ -6,14 +6,14 @@ import { getProduct } from '../../api/index';
 
 export default function Products() {
 
-  async function stuffystuff() {
-    const products: object = await getProduct(1);
-    //console.log(products.title);
-    return products;
-  }
+  /*  async function stuffystuff() {
+     const products: object = await getProduct(1);
+     //console.log(products.title);
+     return products;
+   } */
 
-  const product: object = stuffystuff();
-  console.log(product);
+  // const product: object = stuffystuff();
+  //console.log(product);
 
   return (
     <Fragment>

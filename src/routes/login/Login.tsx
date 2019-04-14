@@ -11,7 +11,7 @@ export default function Login() {
   }
   return (
     <React.Fragment>
-      <h1>Innskráning</h1>
+      <h1 className="login__title">Innskráning</h1>
       <Input text="Notendanafn:" type="text" name="userName" />
       <Input text="Lykilorð:" type="password" name="password" />
       <Button onClick={hallo}>Skrá inn</Button>
