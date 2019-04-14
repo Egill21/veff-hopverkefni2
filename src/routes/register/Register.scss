@@ -1,4 +1,24 @@
 @import '../../config.scss';
 
 .register {
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin: $gutter;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    margin-bottom: $gutter / 2;
+  }
+
+  &__button {
+    margin: $gutter / 2 0 $gutter;
+  }
+
+  &__login {
+    color: $color-font;
+    text-decoration: none;
+  }
 }

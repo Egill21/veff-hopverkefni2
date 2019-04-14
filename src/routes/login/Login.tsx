@@ -11,11 +11,15 @@ export default function Login() {
   }
   return (
     <React.Fragment>
-      <h1 className="login__title">Innskráning</h1>
-      <Input text="Notendanafn:" type="text" name="userName" />
-      <Input text="Lykilorð:" type="password" name="password" />
-      <Button onClick={hallo}>Skrá inn</Button>
-      <Link to="/register">Nýskráning</Link>
+      <div className="login__container">
+        <h1 className="login__title">Innskráning</h1>
+        <div className="login__input">
+          <Input text="Notendanafn:" type="text" name="userName" />
+          <Input text="Lykilorð:" type="password" name="password" />
+        </div>
+        <Button onClick={hallo} className="login__button">Skrá inn</Button>
+        <Link to="/register" className="login__register">Nýskráning</Link>
+      </div>
     </React.Fragment>
   );
 }
