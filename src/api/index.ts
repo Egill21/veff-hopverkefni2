@@ -23,7 +23,7 @@ async function getProduct(id: number | string) : Promise<IProduct> {
 }
 
 async function getProducts() : Promise<Array<IProduct> | null> {
-  const url = new URL(`${baseurl}products/`);
+  const url = new URL(`${baseurl}products?limit=12`);
   const response = await fetch(url.href);
   
   if (!response.ok) {
@@ -36,7 +36,7 @@ async function getProducts() : Promise<Array<IProduct> | null> {
 }
 
 async function getCategories(): Promise<Array<ICategory> | null> {
-  const url = new URL(`${baseurl}categories/`);
+  const url = new URL(`${baseurl}categories?limit=12`);
   const response = await fetch(url.href);
 
   if (!response.ok) {
