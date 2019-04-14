@@ -3,4 +3,50 @@
 
 .products {
 
+  &__container {
+    //background: green;
+    display: flex;
+    //flex-direction: row;
+   // max-width: $max-width;
+    justify-content: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    //justify-content: center;
+    max-width: 1400px;
+  }
+
+  &__product {
+    width: 380px;
+    margin: $gutter / 2;
+  }
+
+  &__box {
+    height: 200px;
+    background: #eee;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: $gutter / 4 0;
+  }
+
+  &__descr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-family: $font-heading;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+  }
 }
