@@ -14,4 +14,18 @@ export interface IProduct {
   updated?: Date;
 }
 
+export interface IProducts {
+  limit: number;
+  offset: number;
+  items: IProduct[];
+  _links: object;
+}
+
+export interface ICategories {
+  limit: number;
+  offset: number;
+  items: ICategory[];
+  _links: object;
+}
+
 // todo fleiri týpur
