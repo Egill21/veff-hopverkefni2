@@ -4,18 +4,8 @@
 .products {
 
   &__container {
-    //background: green;
-    display: flex;
-    //flex-direction: row;
-   // max-width: $max-width;
-    justify-content: center;
-  }
-
-  &__content {
     display: flex;
     flex-wrap: wrap;
-    //justify-content: center;
-    max-width: 1400px;
   }
 
   &__product {
