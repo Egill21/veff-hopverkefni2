@@ -1,4 +1,37 @@
 @import '../../config.scss';
 
 .home {
+  margin: $gutter;
+  max-width: $max-width;
+
+  &__heading {
+    font-family: $font-heading;
+    font-weight: 700;
+  }
+
+  &__button {
+    margin: $gutter 0;
+  }
+
+  &__subheading {
+    font-family: $font-heading;
+    margin-top: $gutter;
+    font-weight: 700;
+    margin-bottom: $gutter / 2;
+  }
+
+  &__categories {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
+
+  &__category {
+    margin: $gutter / 2;
+    width: 380px;
+    font-size: 3rem;
+    padding: $gutter * 2;
+    border: 1px solid #000;
+    text-align: center;
+  }
 }
