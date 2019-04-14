@@ -35,36 +35,20 @@ export default function Home() {
       <div className="home">
         <Helmet title="Forsíða" />
         <h2 className="home__heading">Nýjar vörur</h2>
-        <Products />
+        {products &&
+          <Products productList={products} />
+        }
         <Button className="home__button">Skoða alla flokka</Button>
         <h3 className="home__subheading">Skoðaðu vöruflokkana okkar</h3>
         <div className="home__categories">
-          <div className="home__category">
-            <p className="category">Clothing</p>
-          </div>
           {categories &&
             categories.map((category, i) => {
               return (
-                <div className="home__category">
+                <div key={i} className="home__category">
                   <p className="category">{category.title}</p>
                 </div>
               );
             })}
-          {/* <div className="home__category">
-            <p className="category">Clothing</p>
-          </div>
-          <div className="home__category">
-            <p className="category">Shoes</p>
-          </div>
-          <div className="home__category">
-            <p className="category">Garden</p>
-          </div>
-          <div className="home__category">
-            <p className="category">Computers</p>
-          </div>
-          <div className="home__category">
-            <p className="category">Movies</p>
-          </div> */}
         </div>
       </div>
     </Fragment>

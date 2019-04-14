@@ -1,21 +1,36 @@
 import React, { Fragment } from 'react';
+import { IProduct } from '../../api/types';
 
 import './Products.scss';
 
-import { getProduct } from '../../api/index';
+export default function Products(props: { productList: IProduct[] }) {
 
-export default function Products() {
-
-  /*  async function stuffystuff() {
-     const products: object = await getProduct(1);
-     //console.log(products.title);
-     return products;
-   } */
-
-  // const product: object = stuffystuff();
-  //console.log(product);
+  const { productList } = props;
 
   return (
+    <div className="products__container">
+      {productList.map((product, i) => {
+        return (
+          <div key={i} className="products__product">
+            {/* <div className="products__box">
+              hallo
+            </div> */}
+            <img className="products__box" src={product.image}></img>
+            <div className="products__info">
+              <div className="products__descr">
+                <h3 className="products__title">{product.title}</h3>
+                <p>{product.category}</p>
+              </div>
+              <p className="products__price">{product.price} kr.-</p>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  );
+
+
+/*   return (
     <Fragment>
       <div className="products__container">
         <div className="products__product">
@@ -84,5 +99,7 @@ export default function Products() {
         </div>
       </div>
     </Fragment>
-  );
+  ); */
+
+
 }
