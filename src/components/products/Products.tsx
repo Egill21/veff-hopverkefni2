@@ -6,6 +6,7 @@ import './Products.scss';
 export default function Products(props: { productList: IProduct[] }) {
 
   const { productList } = props;
+	console.log("TCL: Products -> productList", productList)
 
   return (
     <div className="products__container">
@@ -19,7 +20,7 @@ export default function Products(props: { productList: IProduct[] }) {
             <div className="products__info">
               <div className="products__descr">
                 <h3 className="products__title">{product.title}</h3>
-                <p>{product.category}</p>
+                <p>{product.category_title}</p>
               </div>
               <p className="products__price">{product.price} kr.-</p>
             </div>

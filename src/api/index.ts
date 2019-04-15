@@ -8,7 +8,7 @@ async function getProduct(id: number | string) : Promise<IProduct> {
   const url = new URL(String(id), `${baseurl}products/`);
   const response = await fetch(url.href);
 
-  const product: IProduct = {
+/*   const product: IProduct = {
     category: {
       id: 10,
       title: "Flokkur",
@@ -17,7 +17,7 @@ async function getProduct(id: number | string) : Promise<IProduct> {
     image: '',
     price: 100,
     title: "Prufuvara",
-  };
+  }; */
 
   return response.json();
 }
