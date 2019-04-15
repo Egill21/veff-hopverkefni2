@@ -19,6 +19,7 @@ export default function Login() {
   }
 
   function getLogin() {
+    console.log('logging in..');
     const user = login(username, password);
   }
 
@@ -30,7 +31,7 @@ export default function Login() {
           <Input onChange={changeUserName} text="Notendanafn:" type="text" name="userName" />
           <Input onChange={changePassword} text="Lykilorð:" type="password" name="password" />
         </div>
-        <Button onClick={hallo} className="login__button">Skrá inn</Button>
+        <Button onClick={getLogin} className="login__button">Skrá inn</Button>
         <Link to="/register" className="login__register">Nýskráning</Link>
       </div>
     </React.Fragment>

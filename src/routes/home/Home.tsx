@@ -6,6 +6,7 @@ import { IProduct, ICategory } from '../../api/types';
 
 import Products from '../../components/products/Products';
 import Button from './../../components/button/Button';
+import Categories from '../../components/categories/Categories';
 
 import './Home.scss';
 
@@ -37,17 +38,7 @@ export default function Home() {
         <h2 className="home__heading">Nýjar vörur</h2>
         {products && <Products productList={products} />}
         <Button className="home__button">Skoða alla flokka</Button>
-        <h3 className="home__subheading">Skoðaðu vöruflokkana okkar</h3>
-        <div className="home__categories">
-          {categories &&
-            categories.map((category, i) => {
-              return (
-                <div key={i} className="home__category">
-                  <p className="category">{category.title}</p>
-                </div>
-              );
-            })}
-        </div>
+        {categories && <Categories isFrontPage={true} categorieList={categories} ></Categories>}
       </div>
     </Fragment>
   );
