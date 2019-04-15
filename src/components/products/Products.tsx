@@ -12,14 +12,11 @@ export default function Products(props: { productList: IProduct[] }) {
       {productList.map((product, i) => {
         return (
           <div key={i} className="products__product">
-            {/* <div className="products__box">
-              hallo
-            </div> */}
-            <img className="products__box" src={product.image}></img>
+            <img className="products__image" src={product.image} />
             <div className="products__info">
               <div className="products__descr">
                 <h3 className="products__title">{product.title}</h3>
-                <p>{product.category}</p>
+                <p> Category TODO {product.category}</p>
               </div>
               <p className="products__price">{product.price} kr.-</p>
             </div>
@@ -30,76 +27,76 @@ export default function Products(props: { productList: IProduct[] }) {
   );
 
 
-/*   return (
-    <Fragment>
-      <div className="products__container">
-        <div className="products__product">
-          <div className="products__box">
-            hallo
-          </div>
-          <div className="products__info">
-            <div className="products__descr">
-              <h3 className="products__title">Ergonomic Rubber Bacon</h3>
-              <p>Sports</p>
+  /*   return (
+      <Fragment>
+        <div className="products__container">
+          <div className="products__product">
+            <div className="products__box">
+              hallo
             </div>
-            <p className="products__price">635 kr.-</p>
+            <div className="products__info">
+              <div className="products__descr">
+                <h3 className="products__title">Ergonomic Rubber Bacon</h3>
+                <p>Sports</p>
+              </div>
+              <p className="products__price">635 kr.-</p>
+            </div>
+          </div>
+  
+          <div className="products__product">
+            <div className="products__box">
+              hallo
+            </div>
+            <div className="products__info">
+              <div className="products__descr">
+                <h3 className="products__title">Ergonomic Rubber Bacon</h3>
+                <p>Sports</p>
+              </div>
+              <p className="products__price">635 kr.-</p>
+            </div>
+          </div>
+  
+          <div className="products__product">
+            <div className="products__box">
+              hallo
+            </div>
+            <div className="products__info">
+              <div className="products__descr">
+                <h3 className="products__title">Ergonomic Rubber Bacon</h3>
+                <p>Sports</p>
+              </div>
+              <p className="products__price">635 kr.-</p>
+            </div>
+          </div>
+  
+          <div className="products__product">
+            <div className="products__box">
+              hallo
+            </div>
+            <div className="products__info">
+              <div className="products__descr">
+                <h3 className="products__title">Ergonomic Rubber Bacon</h3>
+                <p>Sports</p>
+              </div>
+              <p className="products__price">635 kr.-</p>
+            </div>
+          </div>
+  
+          <div className="products__product">
+            <div className="products__box">
+              hallo
+            </div>
+            <div className="products__info">
+              <div className="products__descr">
+                <h3 className="products__title">Ergonomic Rubber Bacon</h3>
+                <p>Sports</p>
+              </div>
+              <p className="products__price">635 kr.-</p>
+            </div>
           </div>
         </div>
-
-        <div className="products__product">
-          <div className="products__box">
-            hallo
-          </div>
-          <div className="products__info">
-            <div className="products__descr">
-              <h3 className="products__title">Ergonomic Rubber Bacon</h3>
-              <p>Sports</p>
-            </div>
-            <p className="products__price">635 kr.-</p>
-          </div>
-        </div>
-
-        <div className="products__product">
-          <div className="products__box">
-            hallo
-          </div>
-          <div className="products__info">
-            <div className="products__descr">
-              <h3 className="products__title">Ergonomic Rubber Bacon</h3>
-              <p>Sports</p>
-            </div>
-            <p className="products__price">635 kr.-</p>
-          </div>
-        </div>
-
-        <div className="products__product">
-          <div className="products__box">
-            hallo
-          </div>
-          <div className="products__info">
-            <div className="products__descr">
-              <h3 className="products__title">Ergonomic Rubber Bacon</h3>
-              <p>Sports</p>
-            </div>
-            <p className="products__price">635 kr.-</p>
-          </div>
-        </div>
-
-        <div className="products__product">
-          <div className="products__box">
-            hallo
-          </div>
-          <div className="products__info">
-            <div className="products__descr">
-              <h3 className="products__title">Ergonomic Rubber Bacon</h3>
-              <p>Sports</p>
-            </div>
-            <p className="products__price">635 kr.-</p>
-          </div>
-        </div>
-      </div>
-    </Fragment>
-  ); */
+      </Fragment>
+    ); */
 
 
 }
