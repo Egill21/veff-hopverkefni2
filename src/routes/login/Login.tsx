@@ -19,6 +19,7 @@ export default function Login() {
   }
 
   function getLogin() {
+    console.log('logging in..');
     const user = login(username, password);
   }
 

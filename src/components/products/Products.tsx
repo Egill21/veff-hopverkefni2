@@ -14,7 +14,7 @@ export default function Products(props: { productList: IProduct[] }) {
             <div className="products__info">
               <div className="products__descr">
                 <h3 className="products__title">{product.title}</h3>
-                <p> Category TODO {product.category}</p>
+                <p>{product.category_title}</p>
               </div>
               <p className="products__price">{product.price} kr.-</p>
             </div>
