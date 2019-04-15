@@ -30,6 +30,27 @@ async function getProducts(): Promise<Array<IProduct> | null> {
   return prods.items;
 }
 
+async function getPagedProducts(categoryID: number, prev?: string, next?: string ): Promise<IProducts | null> {
+  let myURL = `${baseurl}products?limit=12&category=${categoryID}`;
+
+  if (prev) {
+    myURL = `${prev}&category=${categoryID}`;
+  }
+
+  if (next) {
+    myURL = `${next}&category=${categoryID}`;
+  }
+
+  const url = new URL(myURL);
+  const response = await fetch(url.href);
+
+  if (!response.ok) {
+    return null;
+  }
+
+  return response.json();
+}
+
 async function getCategories(): Promise<Array<ICategory> | null> {
   const url = new URL(`${baseurl}categories?limit=12`);
   const response = await fetch(url.href);
@@ -41,6 +62,16 @@ async function getCategories(): Promise<Array<ICategory> | null> {
   const cats: ICategories = await response.json();
 
   return cats.items;
+}
+
+async function getCategory(id : number): Promise<ICategory | null> {
+  const url = new URL(`${baseurl}categories/${id}`);
+  const response = await fetch(url.href);
+
+  if (!response.ok) {
+    return null;
+  }
+  return response.json();
 }
 
 async function login(
@@ -80,4 +111,12 @@ async function register(userName: string, password: string, email: string) {
   });
 }
 
-export { getProduct, getProducts, getCategories, login, register };
+export {
+  getProduct,
+  getProducts,
+  getPagedProducts,
+  getCategories,
+  getCategory,
+  login,
+  register
+};
