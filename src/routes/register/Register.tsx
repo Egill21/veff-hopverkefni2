@@ -7,9 +7,7 @@ import Button from './../../components/button/Button';
 import './Register.scss';
 
 export default function Register() {
-  async function makeUser() {
-    console.log('hallo');
-  }
+  async function makeUser() {}
   return (
     <React.Fragment>
       <div className="register__container">
