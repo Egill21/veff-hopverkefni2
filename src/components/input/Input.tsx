@@ -12,8 +12,10 @@ interface props {
 export default function Input(props: props) {
   return (
     <React.Fragment>
-      <label htmlFor={props.name}>{props.text}</label>
-      <input onChange={props.onChange} type={props.type} name={props.name} />
-    </React.Fragment>
+      <div className="input__container">
+        <label htmlFor={props.name} className="input__label">{props.text}</label>
+        <input onChange={props.onChange} type={props.type} name={props.name} className="input__input" />
+      </div>
+    </React.Fragment >
   );
 }

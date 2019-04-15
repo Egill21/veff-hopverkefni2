@@ -24,21 +24,15 @@ export default function Login() {
 
   return (
     <React.Fragment>
-      <h1 className="login__title">Innskráning</h1>
-      <Input
-        onChange={changeUserName}
-        text="Notendanafn:"
-        type="text"
-        name="userName"
-      />
-      <Input
-        onChange={changePassword}
-        text="Lykilorð:"
-        type="password"
-        name="password"
-      />
-      <Button onClick={getLogin}>Skrá inn</Button>
-      <Link to="/register">Nýskráning</Link>
+      <div className="login__container">
+        <h1 className="login__title">Innskráning</h1>
+        <div className="login__input">
+          <Input onChange={changeUserName} text="Notendanafn:" type="text" name="userName" />
+          <Input onChange={changePassword} text="Lykilorð:" type="password" name="password" />
+        </div>
+        <Button onClick={hallo} className="login__button">Skrá inn</Button>
+        <Link to="/register" className="login__register">Nýskráning</Link>
+      </div>
     </React.Fragment>
   );
 }
