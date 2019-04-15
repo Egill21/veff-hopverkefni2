@@ -2,7 +2,28 @@
 
 .login {
 
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin: $gutter;
+  }
+
   &__title {
-    
+    font-family: $font-heading;
+    margin-bottom: $gutter / 2;
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button {
+    margin: $gutter / 2 0 $gutter;
+  }
+
+  &__register {
+    color: $color-font;
+    text-decoration: none;
   }
 }

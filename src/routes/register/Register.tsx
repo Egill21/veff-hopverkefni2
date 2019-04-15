@@ -12,12 +12,14 @@ export default function Register() {
   }
   return (
     <React.Fragment>
-      <h1>Nýskráning</h1>
-      <Input name="userName" type="text" text="Notendanafn:" />
-      <Input name="password" type="password" text="Lykilorð:" />
-      <Input name="email" type="email" text="Netfang:" />
-      <Button onClick={makeUser}>Nýskrá</Button>
-      <Link to="/login">Innskráning</Link>
+      <div className="register__container">
+        <h1 className="register__title">Nýskráning</h1>
+        <Input name="userName" type="text" text="Notendanafn:" />
+        <Input name="password" type="password" text="Lykilorð:" />
+        <Input name="email" type="email" text="Netfang:" />
+        <Button onClick={makeUser} className="register__button">Nýskrá</Button>
+        <Link to="/login" className="register__login">Innskráning</Link>
+      </div>
     </React.Fragment>
   );
 }
