@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
-import { IProduct, ICategory } from '../../api/types';
+import React from 'react';
+import { IProduct } from '../../api/types';
+import { Link } from 'react-router-dom';
 
 import './Products.scss';
 
@@ -9,16 +10,18 @@ export default function Products(props: { productList: IProduct[] }) {
     <div className="products__container">
       {productList.map((product, i) => {
         return (
-          <div key={i} className="products__product">
-            <img className="products__box" src={product.image} />
-            <div className="products__info">
-              <div className="products__descr">
-                <h3 className="products__title">{product.title}</h3>
-                <p>{product.category_title}</p>
+          <Link className="products__link" key={i} to={`/product/${product.id}`}>
+            <div className="products__product">
+              <img className="products__box" src={product.image} />
+              <div className="products__info">
+                <div className="products__descr">
+                  <h3 className="products__title">{product.title}</h3>
+                  <p>{product.category_title}</p>
+                </div>
+                <p className="products__price">{product.price} kr.-</p>
               </div>
-              <p className="products__price">{product.price} kr.-</p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

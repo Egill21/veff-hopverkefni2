@@ -30,15 +30,11 @@ async function getProducts(): Promise<Array<IProduct> | null> {
   return prods.items;
 }
 
-async function getPagedProducts(categoryID: number, prev?: string, next?: string ): Promise<IProducts | null> {
+async function getPagedProducts(categoryID: number, slug?: string): Promise<IProducts | null> {
   let myURL = `${baseurl}products?limit=12&category=${categoryID}`;
 
-  if (prev) {
-    myURL = `${prev}&category=${categoryID}`;
-  }
-
-  if (next) {
-    myURL = `${next}&category=${categoryID}`;
+  if (slug) {
+    myURL = `${slug}&category=${categoryID}`;
   }
 
   const url = new URL(myURL);

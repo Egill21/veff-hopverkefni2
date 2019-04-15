@@ -19,7 +19,7 @@ export interface IProducts {
   limit: number;
   offset: number;
   items: IProduct[];
-  _links: object;
+  _links: Links;
 }
 
 export interface ICategories {
@@ -45,6 +45,22 @@ export interface IUser {
 export interface ILogInError {
   field: string;
   error: string;
+}
+
+export interface Links {
+  self: Self;
+  prev: Prev;
+  next: Next;
+}
+
+export interface Self {
+  href: string;
+}
+export interface Prev {
+  href: string;
+}
+export interface Next {
+  href: string;
 }
 
 // todo fleiri týpur
