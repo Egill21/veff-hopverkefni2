@@ -35,10 +35,12 @@ export default function Home() {
     <Fragment>
       <div className="home">
         <Helmet title="Forsíða" />
-        <h2 className="home__heading">Nýjar vörur</h2>
-        {products && <Products productList={products} />}
-        <Button className="home__button">Skoða alla flokka</Button>
-        {categories && <Categories isFrontPage={true} categorieList={categories} ></Categories>}
+        <div className="home__container">
+          <h2 className="home__heading">Nýjar vörur</h2>
+          {products && <Products productList={products} />}
+          <Button className="home__button">Skoða alla flokka</Button>
+          {categories && <Categories isFrontPage={true} categorieList={categories} ></Categories>}
+        </div>
       </div>
     </Fragment>
   );
