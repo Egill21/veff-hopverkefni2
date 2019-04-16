@@ -17,8 +17,8 @@ async function getProduct(id: number | string): Promise<IProduct> {
   return response.json();
 }
 
-async function getProducts(): Promise<Array<IProduct> | null> {
-  const url = new URL(`${baseurl}products?limit=12`);
+async function getProducts(limit?:number): Promise<Array<IProduct> | null> {
+  const url = new URL(`${baseurl}products?limit=${limit ? limit : 12}`);
   const response = await fetch(url.href);
 
   if (!response.ok) {
@@ -30,15 +30,11 @@ async function getProducts(): Promise<Array<IProduct> | null> {
   return prods.items;
 }
 
-async function getPagedProducts(categoryID: number, prev?: string, next?: string ): Promise<IProducts | null> {
+async function getPagedProducts(categoryID: number, slug?: string): Promise<IProducts | null> {
   let myURL = `${baseurl}products?limit=12&category=${categoryID}`;
 
-  if (prev) {
-    myURL = `${prev}&category=${categoryID}`;
-  }
-
-  if (next) {
-    myURL = `${next}&category=${categoryID}`;
+  if (slug) {
+    myURL = `${slug}&category=${categoryID}`;
   }
 
   const url = new URL(myURL);
@@ -49,6 +45,19 @@ async function getPagedProducts(categoryID: number, prev?: string, next?: string
   }
 
   return response.json();
+}
+
+async function getMoreProducts(categoryID: number): Promise<Array<IProduct> | null> {
+  const url = new URL(`${baseurl}products?limit=6&category=${categoryID}`);
+  const response = await fetch(url.href);
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const prods: IProducts = await response.json();
+
+  return prods.items;
 }
 
 async function getCategories(): Promise<Array<ICategory> | null> {
@@ -115,6 +124,7 @@ export {
   getProduct,
   getProducts,
   getPagedProducts,
+  getMoreProducts,
   getCategories,
   getCategory,
   login,

@@ -1,5 +1,26 @@
 @import '../../config';
 
 .product {
+  margin: $gutter;
+  max-width: $max-width;
+
+  &__infoContainer {
+    display: flex;
+    margin-bottom: $gutter*2;
+  }
+
+  &__image {
+    margin-right: $gutter;
+    max-width: $max-width/2;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    margin-bottom: $gutter;
+  }
+
+  &__description {
+    margin-bottom: $gutter/2;
+  }
 
 }
