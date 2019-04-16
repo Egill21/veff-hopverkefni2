@@ -18,7 +18,7 @@ async function getProduct(id: number | string): Promise<IProduct> {
   return response.json();
 }
 
-async function getProducts(limit?:number): Promise<Array<IProduct> | null> {
+async function getProducts(limit?: number): Promise<Array<IProduct> | null> {
   const url = new URL(`${baseurl}products?limit=${limit ? limit : 12}`);
   const response = await fetch(url.href);
 
@@ -31,7 +31,10 @@ async function getProducts(limit?:number): Promise<Array<IProduct> | null> {
   return prods.items;
 }
 
-async function getPagedProducts(categoryID: number, slug?: string): Promise<IProducts | null> {
+async function getPagedProducts(
+  categoryID: number,
+  slug?: string
+): Promise<IProducts | null> {
   let myURL = `${baseurl}products?limit=12&category=${categoryID}`;
 
   if (slug) {
@@ -48,7 +51,9 @@ async function getPagedProducts(categoryID: number, slug?: string): Promise<IPro
   return response.json();
 }
 
-async function getMoreProducts(categoryID: number): Promise<Array<IProduct> | null> {
+async function getMoreProducts(
+  categoryID: number
+): Promise<Array<IProduct> | null> {
   const url = new URL(`${baseurl}products?limit=6&category=${categoryID}`);
   const response = await fetch(url.href);
 
@@ -74,7 +79,7 @@ async function getCategories(): Promise<Array<ICategory> | null> {
   return cats.items;
 }
 
-async function getCategory(id : number): Promise<ICategory | null> {
+async function getCategory(id: number): Promise<ICategory | null> {
   const url = new URL(`${baseurl}categories/${id}`);
   const response = await fetch(url.href);
 
@@ -136,26 +141,14 @@ async function register(userName: string, password: string, email: string) {
   });
 }
 
-<<<<<<< HEAD
 async function logOut() {
   localStorage.removeItem('user');
   localStorage.removeItem('token');
 }
 
-export {
-  getProduct,
-  getProducts,
-  getCategories,
-  login,
-  register,
-  logOut,
-  post2
-};
-
 export default combineReducers({
   auth
 });
-=======
 export {
   getProduct,
   getProducts,
@@ -164,6 +157,7 @@ export {
   getCategories,
   getCategory,
   login,
-  register
+  register,
+  logOut,
+  post2
 };
->>>>>>> d3a97d3aa9790f7a25257d12857d62967c2d5731
