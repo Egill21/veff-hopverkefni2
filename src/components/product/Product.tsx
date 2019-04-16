@@ -2,13 +2,34 @@ import React from 'react';
 
 import { IProduct } from '../../api/types';
 
-export default function SingleProduct(props: { product: IProduct }) {
+import './Product.scss';
 
+export default function SingleProduct(props: { product: IProduct }) {
   const { product } = props;
 
-  console.log(product);
+  const desc = product.description;
+  const textArr = desc ? desc.split('\n') : [];
+  const descElement = textArr.map((paragraph, i) => {
+    return (
+      <p key={i} className="product__description">
+        {paragraph}
+      </p>
+    );
+  });
 
   return (
-    <p>product</p>
+    <div className="product__infoContainer">
+      <img className="product__image" src={product.image} />
+      <div>
+        <h2 className="product__title">{product.title}</h2>
+        <div className="product__description">
+          <p>
+            Flokkur: {product.category_title} <br />
+            Verð: {`${product.price} kr-`}
+          </p>
+        </div>
+        {descElement}
+      </div>
+    </div>
   );
 }
