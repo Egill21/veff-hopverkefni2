@@ -48,7 +48,7 @@ function Header(props: {
           <NavLink className="header__link selected" exact to="/cart">
             Nýjar vörur
           </NavLink>
-          <NavLink className="header__link" exact to="/cart">
+          <NavLink className="header__link" exact to="/categories">
             Flokkar
           </NavLink>
         </div>

@@ -1,0 +1,100 @@
+@import '../../config.scss';
+
+.category {
+  margin: $gutter;
+  max-width: $max-width;
+
+  &__heading {
+    font-family: $font-heading;
+    font-weight: 700;
+  }
+
+  &__searchContainer {
+    margin: $gutter 0px;
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: $gutter*10;
+  }
+
+  &__searchlabel {
+    font-family: $font_main;
+  }
+
+  &__searchInput {
+    border: solid 1px $color-gray;
+    border-radius: 2px;
+    padding: 6px;
+    width: $gutter*6;
+  }
+
+  &__searchButton {
+    width: 100%;
+    max-width: 50px;
+    padding: 1px;
+    height: 100%;
+    border: 1px solid $color-font;
+    border-radius: 4px;
+
+    font-family: $font_main;
+    font-size: 1rem;
+
+    color: $color-background;
+    background-color: $color-font;
+
+    cursor: pointer;
+
+    transition:
+    color $transition,
+    background-color $transition,
+    border-color $transition;
+
+    &:hover {
+      color: $color-font;
+      background-color: $color-background;
+    }
+  }
+
+  &__pages {
+    margin: $gutter 0px;
+    display: flex;
+    flex-direction: row;
+    height: $gutter;
+  }
+
+  &__pageButton {
+    margin-right: $gutter/2;
+
+    width: 100%;
+    max-width: 90px;
+    padding: 1px;
+    height: 100%;
+    border: 1px solid $color-font;
+    border-radius: 4px;
+
+    font-size: 0.8rem;
+    font-family: $font_main;
+
+    color: $color-background;
+    background-color: $color-font;
+
+    cursor: pointer;
+
+    transition:
+    color $transition,
+    background-color $transition,
+    border-color $transition;
+
+    &:hover {
+      color: $color-font;
+      background-color: $color-background;
+    }
+  }
+
+  &__currentPage {
+    margin-right: $gutter/2;
+    margin: auto $gutter/2 auto 0;
+  }
+
+}

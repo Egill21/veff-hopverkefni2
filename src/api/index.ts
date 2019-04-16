@@ -15,22 +15,41 @@ async function getProduct(id: number | string): Promise<IProduct> {
   const url = new URL(String(id), `${baseurl}products/`);
   const response = await fetch(url.href);
 
-  const product: IProduct = {
-    category: {
-      id: 10,
-      title: 'Flokkur'
-    },
-    id: 1,
-    image: '',
-    price: 100,
-    title: 'Prufuvara'
-  };
+  return response.json();
+}
+
+async function getProducts(limit?:number): Promise<Array<IProduct> | null> {
+  const url = new URL(`${baseurl}products?limit=${limit ? limit : 12}`);
+  const response = await fetch(url.href);
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const prods: IProducts = await response.json();
+
+  return prods.items;
+}
+
+async function getPagedProducts(categoryID: number, slug?: string): Promise<IProducts | null> {
+  let myURL = `${baseurl}products?limit=12&category=${categoryID}`;
+
+  if (slug) {
+    myURL = `${slug}&category=${categoryID}`;
+  }
+
+  const url = new URL(myURL);
+  const response = await fetch(url.href);
+
+  if (!response.ok) {
+    return null;
+  }
 
   return response.json();
 }
 
-async function getProducts(): Promise<Array<IProduct> | null> {
-  const url = new URL(`${baseurl}products?limit=12`);
+async function getMoreProducts(categoryID: number): Promise<Array<IProduct> | null> {
+  const url = new URL(`${baseurl}products?limit=6&category=${categoryID}`);
   const response = await fetch(url.href);
 
   if (!response.ok) {
@@ -53,6 +72,16 @@ async function getCategories(): Promise<Array<ICategory> | null> {
   const cats: ICategories = await response.json();
 
   return cats.items;
+}
+
+async function getCategory(id : number): Promise<ICategory | null> {
+  const url = new URL(`${baseurl}categories/${id}`);
+  const response = await fetch(url.href);
+
+  if (!response.ok) {
+    return null;
+  }
+  return response.json();
 }
 
 async function login(
@@ -107,6 +136,7 @@ async function register(userName: string, password: string, email: string) {
   });
 }
 
+<<<<<<< HEAD
 async function logOut() {
   localStorage.removeItem('user');
   localStorage.removeItem('token');
@@ -125,3 +155,15 @@ export {
 export default combineReducers({
   auth
 });
+=======
+export {
+  getProduct,
+  getProducts,
+  getPagedProducts,
+  getMoreProducts,
+  getCategories,
+  getCategory,
+  login,
+  register
+};
+>>>>>>> d3a97d3aa9790f7a25257d12857d62967c2d5731
