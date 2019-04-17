@@ -169,13 +169,14 @@ async function logOut() {
 }
 
 async function getCart(token: string): Promise<ICart> {
+  console.log(token);
   const url = new URL(`${baseurl}cart`);
   const response = await fetch(url.href, {
-    //method: 'GET',
+    method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: token
+      'Authorization': `Bearer ${token}`
     }
   });
   return await response.json();

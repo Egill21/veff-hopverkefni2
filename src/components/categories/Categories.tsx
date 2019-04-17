@@ -18,8 +18,8 @@ export default function Categories(props: { isFrontPage: boolean, categorieList:
       <Fragment>
         {categorieList.map((category, i) => {
           return (
-            <div className="categories__col">
-              <div key={i} className="categories__category">
+            <div key={i} className="categories__col">
+              <div className="categories__category">
                 <p>{category.title}</p>
               </div>
             </div>
@@ -32,8 +32,8 @@ export default function Categories(props: { isFrontPage: boolean, categorieList:
       <Fragment>
         {categorieList.map((category, i) => {
           return (
-            <div className="categories__col">
-              <Link key={i} className="categories__title" to={`/categories/${category.id}`}>
+            <div key={i} className="categories__col">
+              <Link className="categories__title" to={`/categories/${category.id}`}>
                 <div onClick={() => categoryClick(category.id)} className="categories__category__back">
                   <p>{category.title}</p>
                 </div>
