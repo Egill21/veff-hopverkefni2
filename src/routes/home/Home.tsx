@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-// import { useAsyncEffect } from 'use-async-effect';
 
 import { IProduct, ICategory } from '../../api/types';
 
@@ -10,7 +9,7 @@ import Categories from '../../components/categories/Categories';
 
 import './Home.scss';
 
-import { getProducts, getCategories, login } from '../../api/index';
+import { getProducts, getCategories } from '../../api/index';
 
 export default function Home() {
   const [products, setProduct] = useState<Array<IProduct> | null>([]);
@@ -34,15 +33,22 @@ export default function Home() {
   return (
     <Fragment>
       <Helmet title="Forsíða" />
-      <h2 className="home__heading">Nýjar vörur</h2>
-      <div className="home__row">
-        {products && <Products productList={products} />}
-        <Button className="home__button">Skoða alla flokka</Button>
-      </div>
-      <h2 className="home__subheading">Skoðaðu vöruflokkana okkar</h2>
-      <div className="home__row">
-        {categories && <Categories isFrontPage={true} categorieList={categories} />}
-      </div>
+      {loading &&
+        <p>Hleð gögnum...</p>
+      }
+      {!loading &&
+        <Fragment>
+          <h2 className="home__heading">Nýjar vörur</h2>
+          <div className="home__row">
+            {products && <Products productList={products} />}
+            <Button className="home__button">Skoða alla flokka</Button>
+          </div>
+          <h2 className="home__subheading">Skoðaðu vöruflokkana okkar</h2>
+          <div className="home__row">
+            {categories && <Categories isFrontPage={true} categorieList={categories} />}
+          </div>
+        </Fragment>
+      }
     </Fragment>
   );
 }

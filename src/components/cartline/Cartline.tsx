@@ -6,9 +6,21 @@ import { getCart, deleteFromCart } from '../../api/index';
 import { ICart, ICartline } from '../../api/types';
 import '../cart/Cart.scss';
 
-export default function Cartline(props: { line: ICartline }) {
+export default function Cartline(props: { line: ICartline, token: string | null, deleteLine: any, updateLine: any }) {
 
-  const { line } = props;
+  const { line, token, deleteLine, updateLine } = props;
+
+  const [quantity, setQuantity] = useState<number | string>(line.quantity);
+
+  function updateQuantity(e: React.ChangeEvent<HTMLInputElement>) {
+    const input = parseInt(e.target.value);
+    const value = isNaN(input) ? '' : input;
+    if (typeof value === 'number' && value < 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(value);
+    }
+  }
 
   return (
     <div className="cart__col">
@@ -25,14 +37,15 @@ export default function Cartline(props: { line: ICartline }) {
             <input
               type="number"
               className="cart__quantity--input"
-              placeholder={String(line.quantity)}
+              value={quantity}
+              onChange={updateQuantity}
             />
-            <Button className="cart__update" children="Uppfæra" />
+            <Button onClick={() => updateLine(line.id, quantity, token)} className="cart__update" children="Uppfæra" />
           </div>
           <p className="cart__amount">{`Samtals: ${
             line.total
           } kr.-`}</p>
-          <Button className="cart__delete" children="Eyða línu" />
+          <Button onClick={() => deleteLine(line.id, token)} className="cart__delete" children="Eyða línu" />
         </div>
       </div>
     </div>

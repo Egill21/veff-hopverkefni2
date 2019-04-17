@@ -6,7 +6,9 @@ import {
   IlogInInfo,
   ILogInError,
   ICart,
-  ICartline
+  ICartline,
+  IOrder,
+  IOrders,
 } from './types';
 
 // Sækja slóð á API úr env
@@ -203,10 +205,10 @@ async function addToCart(
   });
 }
 
-async function deleteFromCart(lineID: number, quantity: number, token: string):Promise<ICartline | ILogInError> {
+async function updateCart(lineID: number, quantity: number, token: string | null):Promise<ICartline | ILogInError> {
   const url = new URL(`${baseurl}cart/line/${lineID}`);
   const response = await fetch(url.href, {
-    method: 'DELETE',
+    method: 'PATCH',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -219,6 +221,54 @@ async function deleteFromCart(lineID: number, quantity: number, token: string):P
   return response.json();
 }
 
+async function deleteFromCart(lineID: number, token: string | null):Promise<void> {
+  const url = new URL(`${baseurl}cart/line/${lineID}`);
+  await fetch(url.href, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  });
+}
+
+async function createOrder(name: string, address: string, token: string | null):Promise<void> {
+  const url = new URL(`${baseurl}orders`);
+  await fetch(url.href, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      name: name,
+      address: address
+    })
+  });
+}
+
+async function getOrders(token: string | null):Promise<IOrders> {
+  const url = new URL(`${baseurl}orders`);
+  const response = await fetch(url.href, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.json();
+}
+
+async function getOrder(token: string, id: string):Promise<ICart> {
+  const url = new URL(id, `${baseurl}orders/`);
+  const response = await fetch(url.href, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.json();
+}
+
 export {
   getProduct,
   getProducts,
@@ -226,8 +276,12 @@ export {
   getMoreProducts,
   getCategories,
   getCategory,
+  getOrders,
+  getOrder,
   addToCart,
+  updateCart,
   deleteFromCart,
+  createOrder,
   login,
   register,
   logOut,
