@@ -11,7 +11,7 @@ export default function Cart() {
     <Context.Consumer>
       {({ token }) => {
         return (
-          <div className="cart">
+          <div className="cart__row">
             <AddToCart token={token} />
           </div>
         );
