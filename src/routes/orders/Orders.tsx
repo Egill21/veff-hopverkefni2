@@ -1,7 +1,24 @@
 import React from 'react';
 
-import './Orders.scss';
+import { Context } from '../../User';
+import Userorders from '../../components/userorders/Userorders';
+import NoAccess from '../system-pages/NoAccess';
 
 export default function Orders() {
-  return <p>orders</p>;
+
+  return (
+    <Context.Consumer>
+      {({ token }) => {
+        if (!token) {
+          return (
+            <NoAccess />
+          )
+        } else {
+          return (
+            <Userorders token={token} />
+          )
+        }
+      }}
+    </Context.Consumer>
+  )
 }

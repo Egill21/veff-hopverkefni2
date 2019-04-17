@@ -32,17 +32,24 @@ export default function Product(props: any) {
 
   return (
     <Fragment>
-      {product &&
+      {loading &&
+        <p>Hleð gögnum...</p>
+      }
+      {!loading &&
         <Fragment>
+          {product &&
+            <Fragment>
+              <div className="product__row">
+                <SingleProduct product={product} />
+              </div>
+              <h2 className="product__heading">Meira úr {product.category_title}</h2>
+            </Fragment>
+          }
           <div className="product__row">
-            <SingleProduct product={product} />
+            {products && <Products productList={products} />}
           </div>
-          <h2 className="product__heading">Meira úr {product.category_title}</h2>
         </Fragment>
       }
-      <div className="product__row">
-        {products && <Products productList={products} />}
-      </div>
     </Fragment>
   );
 }

@@ -1,3 +1,5 @@
+import { string } from "prop-types";
+
 export interface ICategory {
   id: number;
   title: string;
@@ -36,6 +38,9 @@ export interface ICart {
   updated: Date;
   lines: ICartline[];
   total: number;
+  name?: string;
+  address?: string;
+  user_id?: number;
 }
 
 export interface IProducts {
@@ -50,6 +55,22 @@ export interface ICategories {
   offset: number;
   items: ICategory[];
   _links: object;
+}
+
+export interface IOrder {
+  id: number;
+  name: string;
+  address: string;
+  created: Date;
+  updated: Date;
+  user_id: number;
+}
+
+export interface IOrders {
+  limit: number;
+  offset: number;
+  items: IOrder[];
+  _links: Links;
 }
 
 export interface IlogInInfo {

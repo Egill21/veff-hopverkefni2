@@ -68,6 +68,7 @@
     align-items: center;
 
     &--input {
+      margin-bottom: 200px; // egill ad fokkast
       border: 1px solid #ddd;
       width: $gutter * 2;
       height: $gutter * 1.2;
@@ -75,7 +76,8 @@
   }
 
   &__update {
-    width: auto;
+    // width: auto;
+    width: 800px; // egil ad fokkast
     height: $gutter * 1.2;
     line-height: 0.5rem;
   }

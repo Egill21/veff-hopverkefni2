@@ -12,9 +12,9 @@ export default function Products(props: { productList: IProduct[] }) {
       {
         productList.map((product, i) => {
           return (
-            <div className="products__col">
+            <div key={i} className="products__col">
               <div className="products__product">
-                <Link className="products__link" key={i} to={`/product/${product.id}`}>
+                <Link className="products__link" to={`/product/${product.id}`}>
                   <div className="products__imgcont">
                     <img className="products__image" src={product.image} />
                   </div>

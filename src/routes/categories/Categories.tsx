@@ -24,9 +24,14 @@ export default function CategoriesRoute() {
 
   return (
     <Fragment>
-      <div className="categories">
-        {categories && <Categories isFrontPage={false} categorieList={categories} ></Categories>}
-      </div>
+      {loading &&
+        <p>Hleð gögnum...</p>
+      }
+      {!loading &&
+        <div className="categories">
+          {categories && <Categories isFrontPage={false} categorieList={categories} ></Categories>}
+        </div>
+      }
     </Fragment>
   );
 }
