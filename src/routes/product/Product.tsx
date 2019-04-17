@@ -12,7 +12,7 @@ export default function Product(props: any) {
 
   const { match } = props;
   const { id } = match.params;
-  
+
   const [product, setProduct] = useState<IProduct | null>(null);
   const [products, setProducts] = useState<Array<IProduct> | null>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,16 +31,18 @@ export default function Product(props: any) {
   }, []);
 
   return (
-    <div className="productDetails">
+    <Fragment>
       {product &&
         <Fragment>
-          <SingleProduct product={product} />
-          <h2 className="productDetails__heading">Meira úr {product.category_title}</h2>
+          <div className="product__row">
+            <SingleProduct product={product} />
+          </div>
+          <h2 className="product__heading">Meira úr {product.category_title}</h2>
         </Fragment>
       }
-      {products &&
-        <Products productList={products} />
-      }
-    </div>
+      <div className="product__row">
+        {products && <Products productList={products} />}
+      </div>
+    </Fragment>
   );
 }

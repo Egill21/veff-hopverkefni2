@@ -1,17 +1,18 @@
 @import '../../config';
 
 .product {
-  margin: $gutter;
-  max-width: $max-width;
 
-  &__infoContainer {
-    display: flex;
-    margin-bottom: $gutter*2;
+  &__col {
+    @include columns(12);
+    margin: $gutter * 2 0 $gutter;
+
+    @media (min-width: 700px) {
+      @include columns(6);
+    }
   }
 
   &__image {
-    margin-right: $gutter;
-    max-width: $max-width/2;
+    width: 100%;
   }
 
   &__title {
