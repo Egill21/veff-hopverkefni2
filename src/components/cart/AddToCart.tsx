@@ -17,6 +17,7 @@ export default function AddToCart(props: { token: string | null }) {
     if (token !== null) {
       const data: ICart = await getCart(token);
       setCart(data);
+      console.log(data);
     }
     setLoading(false);
   }
@@ -27,26 +28,30 @@ export default function AddToCart(props: { token: string | null }) {
 
   return (
     <div className="cart__container">
-      <div className="cart__product">
-        <img className="cart__image" src="" alt="hallo" />
-
-        <div className="cart__info">
-          <div className="cart__info--left">
-            <h2 className="cart__title">Incredible Granite Table</h2>
-            <p>Verð: 128 kr.-</p>
-          </div>
-
-          <div className="cart__info--right">
-            <div className="cart__quantity">
-              <p>Fjöldi:</p>
-              <input type="text" className="cart__quantity--input" required />
-              <Button className="cart__update" children="Uppfæra" />
+      {cart && 
+        cart.lines.map((cartline, i) => {
+          return (
+            <div className="cart__product" key={i}>
+              <img className="cart__image" src={cartline.image} />
+              <div className="cart__info">
+                <div className="cart__info--left">
+                  <h2 className="cart__title">{cartline.title}</h2>
+                  <p>{`Verð: ${cartline.price} kr.-`}</p>
+                </div>
+                <div className="cart__info--right">
+                  <div className="cart__quantity">
+                    <p>Fjöldi:</p>
+                    <input type="number" className="cart__quantity--input" required />
+                    <Button className="cart__update" children="Uppfæra" />
+                  </div>
+                  <p className="cart__amount">{`Samtals: ${cartline.total} kr.-`}</p>
+                  <Button className="cart__delete" children="Eyða línu" />
+                </div>
+              </div>
             </div>
-            <p className="cart__amount">Samtals: 125 kr.-</p>
-            <Button className="cart__delete" children="Eyða línu" />
-          </div>
-        </div>
-      </div>
+          );
+        })
+      }
     </div>
   );
 }
