@@ -1,0 +1,78 @@
+@import '../../config.scss';
+
+.cart {
+
+  &__container {
+    margin: $gutter auto;
+    width: 65%;
+    max-width: $max-width;
+  }
+
+  &__product {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__image {
+    background: yellow;
+    width: 200px;
+    height: 100%;
+
+    @media (max-width: 600px) {
+      visibility: hidden;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    min-width: 500px;
+    margin-left: $gutter;
+
+    &--left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 250px;
+      height: 150px;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+  }
+
+  &__quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &--input {
+      border: 1px solid #ddd;
+      width: $gutter * 2;
+      height: $gutter * 1.2;
+    }
+  }
+
+  &__update {
+    width: auto;
+    height: $gutter * 1.2;
+    line-height: 0.5rem;
+  }
+
+  &__amount {
+    font-weight: bold;
+  }
+
+  &__delete {
+    width: auto;
+  }
+}
