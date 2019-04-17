@@ -1,22 +1,30 @@
 @import '../../config.scss';
 
-// TODO laga þetta extra sem kemur neðst á headerinn útaf linkunum
-
 .header {
+  margin: 0 auto;
+  width: 100%;
   background: $color-font;
-  padding: $gutter;
-  min-width: 400px;
+  padding: $gutter $gutter / 2;
+  
+  display: flex;
+  justify-content: center;
 
   &__content {
+    @include columns(12);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    max-width: $max-width; // prófa 
+    width: 100%;
+    max-width: $max-width;
     
-
     @media (max-width: 700px) {
       flex-direction: column;
       align-items: center;
+    }
+
+    @media (min-width: 1400px) {
+      padding-right: 0;
+      padding-left: 0;
     }
   }
 
@@ -27,15 +35,23 @@
   &__titleLink {
     color: $color-background;
     text-decoration: none;
+    line-height: 2em;
   }
 
   &__navigation {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: $gutter * 8;
+    justify-content: flex-start;
     color: $color-background;
     font-family: $font-main;
+    width: 240px;
+    
+    padding-right: $gutter / 2;
+    padding-left: $gutter / 2;
+
+    margin-left: -$gutter / 2;
+    margin-right: -$gutter / 2;
 
     @media (max-width: 700px) {
       margin-top: $gutter / 2;
@@ -44,7 +60,7 @@
   }
 
   &__link {
-    margin: 0 $gutter / 2 $gutter / 4;
+    margin: 0 $gutter / 4 $gutter / 4;
     color: $color-background;
     text-decoration: none;
   }
