@@ -162,6 +162,22 @@ async function logOut() {
   localStorage.removeItem('token');
 }
 
+async function addToCart(productID: number, quantity: number, token: string | null):Promise<void> {
+  const url = new URL(`${baseurl}cart`);
+  await fetch(url.href, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      product: productID,
+      quantity: quantity
+    })
+  })
+}
+
 export {
   getProduct,
   getProducts,
@@ -169,6 +185,7 @@ export {
   getMoreProducts,
   getCategories,
   getCategory,
+  addToCart,
   login,
   register,
   logOut,
