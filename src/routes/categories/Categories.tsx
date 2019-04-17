@@ -1,4 +1,4 @@
-import React, { Fragment ,useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import { ICategory } from '../../api/types';
 
@@ -24,7 +24,9 @@ export default function CategoriesRoute() {
 
   return (
     <Fragment>
-      {categories && <Categories isFrontPage={false} categorieList={categories} ></Categories>}
+      <div className="categories">
+        {categories && <Categories isFrontPage={false} categorieList={categories} ></Categories>}
+      </div>
     </Fragment>
   );
 }

@@ -7,13 +7,14 @@ import './Products.scss';
 export default function Products(props: { productList: IProduct[] }) {
   const { productList } = props;
   return (
-    <div className="products">
-      <div className="products__container">
-        {productList.map((product, i) => {
+
+    < div className="products__container" >
+      {
+        productList.map((product, i) => {
           return (
             <Link className="products__link" key={i} to={`/product/${product.id}`}>
               <div className="products__product">
-                <img className="products__box" src={product.image} />
+                <img className="products__image" src={product.image} />
                 <div className="products__info">
                   <div className="products__descr">
                     <h3 className="products__title">{product.title}</h3>
@@ -24,8 +25,9 @@ export default function Products(props: { productList: IProduct[] }) {
               </div>
             </Link>
           );
-        })}
-      </div>
-    </div>
+        })
+      }
+    </div >
+
   );
 }
