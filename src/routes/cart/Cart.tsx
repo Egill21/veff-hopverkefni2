@@ -4,10 +4,18 @@ import AddToCart from '../../components/cart/AddToCart';
 
 import './Cart.scss';
 
+import { Context } from '../../User';
+
 export default function Cart() {
   return (
-    <div className="cart">
-      <AddToCart />
-    </div>
+    <Context.Consumer>
+      {({ token }) => {
+        return (
+          <div className="cart">
+            <AddToCart token={token} />
+          </div>
+        );
+      }}
+    </Context.Consumer>
   );
 }
