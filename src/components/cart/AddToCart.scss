@@ -2,21 +2,33 @@
 
 .cart {
 
-  &__container {
+  &__col {
+    @include columns(8);
     margin: $gutter auto;
-    width: 65%;
-    max-width: $max-width;
+    //padding: 0;
   }
 
   &__product {
+    //@include columns(8);
     display: flex;
     flex-direction: row;
+    justify-content: center;
+  }
+
+  &__imgcont {
+    @include columns(3);
+    width: 100%;
   }
 
   &__image {
-    background: yellow;
-    width: 200px;
+    display: block;
+    width: 100%;
     height: 100%;
+    align-items: center;
+    object-fit: cover;
+    /* @include columns(3);
+   // width: 100%;
+    height: 100%; */
 
     @media (max-width: 600px) {
       visibility: hidden;
@@ -74,5 +86,9 @@
 
   &__delete {
     width: auto;
+  }
+
+  &__input {
+
   }
 }
