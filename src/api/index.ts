@@ -6,8 +6,7 @@ import {
   IlogInInfo,
   ILogInError
 } from './types';
-import { combineReducers } from 'redux';
-import auth from './reducers/auth';
+
 // Sækja slóð á API úr env
 const baseurl: string | undefined = process.env.REACT_APP_API_URL;
 
@@ -92,7 +91,7 @@ async function getCategory(id: number): Promise<ICategory | null> {
 async function login(
   userName: string,
   password: string
-): Promise<IlogInInfo | Array<ILogInError>> {
+): Promise<IlogInInfo | ILogInError | null> {
   const url = new URL(`${baseurl}users/login`);
   const response = await fetch(url.href, {
     method: 'POST',
@@ -103,12 +102,29 @@ async function login(
     body: JSON.stringify({ username: userName, password: password })
   });
   const status: number = response.status;
-  const temp: IlogInInfo | Array<ILogInError> = await response.json();
-  if (!Array.isArray(temp) && status === 200) {
-    localStorage.setItem('token', temp.token);
-    localStorage.setItem('user', temp.user.username);
+	console.log("TCL: status", status)
+
+  let temp: any = await response.json();
+
+  if (status !== 200) {
+    console.log(temp);
+    if (!temp.errors.length) {
+      temp.errors.field = 'Username';
+      return {
+        errors: [temp],
+        loggedin: false,
+      }
+    }
+    return {
+      errors: temp,
+      loggedin: false
+    }
   }
-  return temp;
+  
+  let info: IlogInInfo = temp;
+  info.loggedin = true;
+
+  return info;
 }
 
 async function post2(addUrl: string, data?: object) {
@@ -146,9 +162,6 @@ async function logOut() {
   localStorage.removeItem('token');
 }
 
-export default combineReducers({
-  auth
-});
 export {
   getProduct,
   getProducts,
