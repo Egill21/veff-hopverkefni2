@@ -4,7 +4,8 @@ import {
   ICategory,
   ICategories,
   IlogInInfo,
-  ILogInError
+  ILogInError,
+  ICart
 } from './types';
 
 // Sækja slóð á API úr env
@@ -102,7 +103,7 @@ async function login(
     body: JSON.stringify({ username: userName, password: password })
   });
   const status: number = response.status;
-	console.log("TCL: status", status)
+  console.log('TCL: status', status);
 
   let temp: any = await response.json();
 
@@ -112,15 +113,15 @@ async function login(
       temp.errors.field = 'Username';
       return {
         errors: [temp],
-        loggedin: false,
-      }
+        loggedin: false
+      };
     }
     return {
       errors: temp,
       loggedin: false
-    }
+    };
   }
-  
+
   let info: IlogInInfo = temp;
   info.loggedin = true;
 
@@ -137,8 +138,11 @@ async function post2(addUrl: string, data?: object) {
     },
     body: JSON.stringify(data)
   });
-  console.log(response);
-  return await response.json();
+  const final = {
+    status: response.status,
+    response: await response.json()
+  };
+  return final;
 }
 
 async function register(userName: string, password: string, email: string) {
@@ -155,6 +159,8 @@ async function register(userName: string, password: string, email: string) {
       password: password
     })
   });
+
+  return await response.json();
 }
 
 async function logOut() {
@@ -162,20 +168,37 @@ async function logOut() {
   localStorage.removeItem('token');
 }
 
-async function addToCart(productID: number, quantity: number, token: string | null):Promise<void> {
+async function getCart(token: string): Promise<ICart> {
+  const url = new URL(`${baseurl}cart`);
+  const response = await fetch(url.href, {
+    //method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: token
+    }
+  });
+  return await response.json();
+}
+
+async function addToCart(
+  productID: number,
+  quantity: number,
+  token: string | null
+): Promise<void> {
   const url = new URL(`${baseurl}cart`);
   await fetch(url.href, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify({
       product: productID,
       quantity: quantity
     })
-  })
+  });
 }
 
 export {
@@ -189,5 +212,6 @@ export {
   login,
   register,
   logOut,
-  post2
+  post2,
+  getCart
 };
