@@ -15,6 +15,29 @@ export interface IProduct {
   updated?: Date;
 }
 
+export interface ICartline {
+  id: number;
+  quantity: number;
+  created?: Date;
+  updated?: Date;
+  product_id: number;
+  title: string;
+  price: number;
+  description?: string;
+  image: string;
+  category_id: number;
+  category_title: string;
+  total: number;
+}
+
+export interface ICart {
+  id: number;
+  created: Date;
+  updated: Date;
+  lines: ICartline[];
+  total: number;
+}
+
 export interface IProducts {
   limit: number;
   offset: number;
@@ -49,6 +72,7 @@ export interface ILogInError {
   user?: IUser;
   token?: string;
 }
+
 export interface ISingleError {
   field: string;
   error: string;
