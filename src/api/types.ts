@@ -30,9 +30,10 @@ export interface ICategories {
 }
 
 export interface IlogInInfo {
-  user: IUser;
+  user: IUser | null;
   token: string;
   expiresIn: number;
+  loggedin?: boolean;
 }
 
 export interface IUser {
@@ -43,6 +44,12 @@ export interface IUser {
 }
 
 export interface ILogInError {
+  errors: ISingleError[];
+  loggedin?: boolean;
+  user?: IUser;
+  token?: string;
+}
+export interface ISingleError {
   field: string;
   error: string;
 }
@@ -61,6 +68,16 @@ export interface Prev {
 }
 export interface Next {
   href: string;
+}
+
+export interface IContext {
+  fetching: boolean;
+  authenticated: boolean;
+  user: IUser;
+  token: string | null;
+  message: ILogInError | null;
+  logginUser: any;
+  loggoutUser: any;
 }
 
 // todo fleiri týpur
