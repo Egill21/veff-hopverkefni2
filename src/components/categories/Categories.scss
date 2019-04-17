@@ -4,6 +4,10 @@
   margin: $gutter;
   max-width: $max-width;
 
+  &__subheading {
+    margin: $gutter / 2 0;
+  }
+
   &__categories {
     display: flex;
     flex-direction: row;
@@ -13,17 +17,18 @@
 
   &__categoryFront {
     // margin: $gutter / 2;
-    margin-bottom: $gutter / 2;
-    width: 380px;
+    margin: $gutter / 2 0;
+    width: 425px;
     font-size: 3rem;
     padding: $gutter * 2;
     border: 1px solid #000;
     text-align: center;
   }
+
   &__category {
     // margin: $gutter / 2;
     margin-bottom: $gutter / 2;
-    width: 380px;
+    width: 425px;
     font-size: 3rem;
     padding: $gutter * 2;
     border: 1px solid #000;
