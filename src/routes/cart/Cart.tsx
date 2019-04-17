@@ -1,9 +1,13 @@
 import React from 'react';
 
+import AddToCart from '../../components/cart/AddToCart';
+
 import './Cart.scss';
 
 export default function Cart() {
   return (
-    <p>cart</p>
+    <div className="cart">
+      <AddToCart />
+    </div>
   );
 }

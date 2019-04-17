@@ -18,20 +18,21 @@
   &__product {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    margin: $gutter / 2 0;
+    width: 425px;
+    margin: $gutter / 4 0;
   }
 
   &__image {
-    width: 400px;
-    height: 250px;
+    width: 425px;
+    height: 280px;
+    object-fit: cover;
   }
 
   &__info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: $gutter / 4 0;
+    margin: $gutter / 2 0;
   }
 
   &__descr {

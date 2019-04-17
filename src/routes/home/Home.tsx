@@ -39,7 +39,7 @@ export default function Home() {
           <h2 className="home__heading">Nýjar vörur</h2>
           {products && <Products productList={products} />}
           <Button className="home__button">Skoða alla flokka</Button>
-          {categories && <Categories isFrontPage={true} categorieList={categories} ></Categories>}
+          {categories && <Categories isFrontPage={true} categorieList={categories} />}
         </div>
       </div>
     </Fragment>
