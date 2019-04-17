@@ -3,28 +3,48 @@
 
 .products {
 
-  &__container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  &__col {
+    @include columns(12);
+    margin-bottom: $gutter * 2;
 
-    @media (max-width: 450px) {
-      flex-direction: column;
-      align-items: center;
+    @media (min-width: 700px) {
+      @include columns(6);
+    }
+
+    @media (min-width: 1200px) {
+      @include columns(4);
     }
   }
 
   &__product {
     display: flex;
+    height: 100%;
     flex-direction: column;
-    width: 425px;
-    margin: $gutter / 4 0;
+    justify-content: space-between;
+  }
+
+  &__imgcont {
+   // width: 100%;
+    height: 60vw;
+
+    @media (min-width: 700px) {
+      height: 30vw;
+    }
+
+    @media (min-width: 1200px) {
+      height: 20vw;
+    }
+
+    @media (min-width: 1600px) {
+      height: 15vw;
+    }
   }
 
   &__image {
-    width: 425px;
-    height: 280px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    align-items: center;
     object-fit: cover;
   }
 

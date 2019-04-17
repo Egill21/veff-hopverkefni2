@@ -13,37 +13,34 @@ export default function Categories(props: { isFrontPage: boolean, categorieList:
     console.log(`${category} clicked!`);
   }
 
-
   if (isFrontPage) {
     return (
       <Fragment>
-        <h3 className="categories__subheading">Skoðaðu vöruflokkana okkar</h3>
-        <div className="categories__categories">
-          {categorieList.map((category, i) => {
-            return (
-              <div key={i} className="categories__categoryFront">
+        {categorieList.map((category, i) => {
+          return (
+            <div className="categories__col">
+              <div key={i} className="categories__category">
                 <p>{category.title}</p>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </Fragment>
     );
   } else {
     return (
       <Fragment>
-        <h3 className="categories__subheading">Skoðaðu vöruflokkana okkar</h3>
-        <div className="categories__categories">
-          {categorieList.map((category, i) => {
-            return (
+        {categorieList.map((category, i) => {
+          return (
+            <div className="categories__col">
               <Link key={i} className="categories__title" to={`/categories/${category.id}`}>
-                <div onClick={() => categoryClick(category.id)} className="categories__category">
+                <div onClick={() => categoryClick(category.id)} className="categories__category__back">
                   <p>{category.title}</p>
                 </div>
               </Link>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </Fragment>
     );
   }

@@ -4,4 +4,9 @@
   margin: 0 auto;
   width: 100%;
   max-width: $max-width;
+
+  @media (max-width: $max-width + 29) {
+    padding-right: $gutter;
+    padding-left: $gutter;
+  }
 }

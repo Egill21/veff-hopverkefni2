@@ -17,6 +17,7 @@ import Order from './routes/orders/Order';
 import NotFound from './routes/system-pages/NotFound';
 
 import './App.scss';
+import './grid.css';
 
 type Props = {
   location: Location;
@@ -31,7 +32,7 @@ function App(props: Props) {
 
       <div className="app">
 
-        <main className="main__content">
+        <main>
           <Switch location={props.location}>
             <Route path="/" exact component={Home} />
             <Route path="/register" exact component={Register} />
