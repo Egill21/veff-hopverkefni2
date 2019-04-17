@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+import Input from './../../components/input/Input';
 import Button from './../../components/button/Button';
 import { getCart } from '../../api/index';
 import { ICart } from '../../api/types';
 import './AddToCart.scss';
-import img1 from './img1.jpg';
 
 export default function AddToCart(props: { token: string | null }) {
   const { token } = props;
@@ -27,8 +27,8 @@ export default function AddToCart(props: { token: string | null }) {
   }, []);
 
   return (
-    <div className="cart__container">
-      {cart && 
+    <div className="cart__col">
+      {cart &&
         cart.lines.map((cartline, i) => {
           return (
             <div className="cart__product" key={i}>
@@ -52,6 +52,22 @@ export default function AddToCart(props: { token: string | null }) {
           );
         })
       }
+      <div className="cart__input">
+        <h2>Senda inn pöntun</h2>
+        <Input
+          text="Nafn:"
+          type="text"
+          name="name"
+        />
+        <Input
+          text="Heimilisfang:"
+          type="text"
+          name="address"
+        />
+      </div>
+      <Button className="cart__button">
+        Senda inn pöntun
+      </Button>
     </div>
   );
 }

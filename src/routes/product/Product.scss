@@ -1,12 +1,15 @@
 @import '../../config.scss';
 
-.productDetails {
-  margin: $gutter;
-  max-width: $max-width;
-
-  &__heading {
-    margin-bottom: $gutter/2;
-    font-family: $font-heading;
+.product {
+  
+  &__row {
+    @include row;
+    margin-bottom: $gutter * 2;
+    flex-wrap: wrap;
   }
 
+  &__heading {
+    margin-bottom: $gutter / 2;
+    font-family: $font-heading;
+  }
 }

@@ -47,7 +47,7 @@ export default function Register() {
   }
   return (
     <React.Fragment>
-      <div className="register__container">
+      <div className="register__col">
         <h1 className="register__title">Nýskráning</h1>
         {errors &&
           errors.map((i: ISingleError, index: number) => {
@@ -57,31 +57,31 @@ export default function Register() {
               </label>
             );
           })}
-        <Input
-          onChange={changeUsername}
-          name="userName"
-          type="text"
-          text="Notendanafn:"
-        />
-        <Input
-          onChange={changePassword}
-          name="password"
-          type="password"
-          text="Lykilorð:"
-        />
-        <Input
-          onChange={changeEmail}
-          name="email"
-          type="email"
-          text="Netfang:"
-        />
-        <Button onClick={makeUser} className="register__button">
-          Nýskrá
+        <div className="register__input">
+          <Input
+            onChange={changeUsername}
+            name="userName"
+            type="text"
+            text="Notendanafn:"
+          />
+          <Input
+            onChange={changePassword}
+            name="password"
+            type="password"
+            text="Lykilorð:"
+          />
+          <Input
+            onChange={changeEmail}
+            name="email"
+            type="email"
+            text="Netfang:"
+          />
+          <Button onClick={makeUser} className="register__button">
+            Nýskrá
         </Button>
-        <Link to="/login" className="register__login">
-          Innskráning
-        </Link>
+        </div>
       </div>
+      <Link to="/login" className="register__login">Innskráning</Link>
     </React.Fragment>
   );
 }
