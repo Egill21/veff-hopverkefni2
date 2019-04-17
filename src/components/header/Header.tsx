@@ -6,7 +6,6 @@ import './Header.scss';
 import { Context } from '../../User';
 
 export default function Header() {
-
   function loggingOut(loggoutUser: any) {
     loggoutUser();
   }
@@ -34,14 +33,19 @@ export default function Header() {
                   </Fragment>
                 )}
                 {user && (
-                  <NavLink
-                    onClick={() => loggingOut(loggoutUser)}
-                    className="header__link"
-                    exact
-                    to="/login"
-                  >
-                    {user.username} (útskrá)
-                  </NavLink>
+                  <Fragment>
+                    <NavLink
+                      onClick={() => loggingOut(loggoutUser)}
+                      className="header__link"
+                      exact
+                      to="/login"
+                    >
+                      {user.username} (útskrá)
+                    </NavLink>
+                    <NavLink className="header__link" exact to="/orders" >
+                      Pantanir
+                    </NavLink>
+                  </Fragment>
                 )}
                 <NavLink className="header__link" exact to="/cart">
                   Karfa
@@ -55,9 +59,8 @@ export default function Header() {
               </div>
             </div>
           </header>
-        )
+        );
       }}
     </Context.Consumer>
   );
 }
-
