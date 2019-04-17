@@ -10,7 +10,7 @@ export default function AddToCart() {
     <div className="cart__container">
       <div className="cart__product">
 
-        <img className="cart__image" src={img1} alt="hallo" />
+        <img className="cart__image" src="" alt="hallo" />
 
         <div className="cart__info">
           <div className="cart__info--left">

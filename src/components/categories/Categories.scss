@@ -1,47 +1,45 @@
 @import '../../config.scss';
 
 .categories {
-  margin: $gutter;
-  max-width: $max-width;
 
-  &__subheading {
-    margin: $gutter / 2 0;
-  }
-
-  &__categories {
+  &__col {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
 
-  &__categoryFront {
-    // margin: $gutter / 2;
-    margin: $gutter / 2 0;
-    width: 425px;
-    font-size: 3rem;
-    padding: $gutter * 2;
-    border: 1px solid #000;
-    text-align: center;
+    @include columns(12);
+    margin-bottom: $gutter * 2;
+
+    @media (min-width: 600px) {
+      @include columns(6);
+    }
+
+    @media (min-width: 1000px) {
+      @include columns(4);
+    }
   }
 
   &__category {
-    // margin: $gutter / 2;
-    margin-bottom: $gutter / 2;
-    width: 425px;
-    font-size: 3rem;
-    padding: $gutter * 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: $gutter * 2 0;
+    margin: -$gutter / 2 0;
+
+    font-size: 2.5rem;
     border: 1px solid #000;
     text-align: center;
 
-    transition:
-    color $transition,
-    background-color $transition,
-    border-color $transition;
+    &__back {
+      background: green;
+      transition:
+        color $transition,
+        background-color $transition,
+        border-color $transition;
 
-    &:hover {
-      color: $color-background;
-      background-color: $color-font;
+      &:hover {
+        color: $color-background;
+        background-color: $color-font;
+      }
     }
   }
 
@@ -49,5 +47,4 @@
     text-decoration: none;
     color: black;
   }
-
 }
