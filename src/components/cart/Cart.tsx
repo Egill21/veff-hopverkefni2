@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import Input from './../../components/input/Input';
-import Button from './../../components/button/Button';
-import { getCart } from '../../api/index';
+import Input from '../input/Input';
+import Button from '../button/Button';
+import { getCart, deleteFromCart } from '../../api/index';
 import { ICart } from '../../api/types';
-import './AddToCart.scss';
+import './Cart.scss';
 
-export default function AddToCart(props: { token: string | null }) {
+export default function Cart(props: { token: string | null }) {
   const { token } = props;
 
   const [loading, setLoading] = useState(false);
@@ -19,6 +19,13 @@ export default function AddToCart(props: { token: string | null }) {
       setCart(data);
       console.log(data);
     }
+    setLoading(false);
+  }
+
+  async function updateLine(lineID: number, quantity: number, token: string) {
+    setLoading(true);
+    const results = await deleteFromCart(lineID, quantity, token);
+    await fetchData();
     setLoading(false);
   }
 
@@ -41,7 +48,7 @@ export default function AddToCart(props: { token: string | null }) {
                 <div className="cart__info--right">
                   <div className="cart__quantity">
                     <p>Fjöldi:</p>
-                    <input type="number" className="cart__quantity--input" required />
+                    <input type="number" className="cart__quantity--input" placeholder={String(cartline.quantity)} />
                     <Button className="cart__update" children="Uppfæra" />
                   </div>
                   <p className="cart__amount">{`Samtals: ${cartline.total} kr.-`}</p>

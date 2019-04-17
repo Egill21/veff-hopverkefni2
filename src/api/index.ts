@@ -5,7 +5,8 @@ import {
   ICategories,
   IlogInInfo,
   ILogInError,
-  ICart
+  ICart,
+  ICartline
 } from './types';
 
 // Sækja slóð á API úr env
@@ -202,6 +203,22 @@ async function addToCart(
   });
 }
 
+async function deleteFromCart(lineID: number, quantity: number, token: string):Promise<ICartline | ILogInError> {
+  const url = new URL(`${baseurl}cart/line/${lineID}`);
+  const response = await fetch(url.href, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      quantity: quantity
+    })
+  });
+  return response.json();
+}
+
 export {
   getProduct,
   getProducts,
@@ -210,6 +227,7 @@ export {
   getCategories,
   getCategory,
   addToCart,
+  deleteFromCart,
   login,
   register,
   logOut,

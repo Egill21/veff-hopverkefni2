@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AddToCart from '../../components/cart/AddToCart';
+import AddToCart from '../../components/cart/Cart';
 
 import './Cart.scss';
 
