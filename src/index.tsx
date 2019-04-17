@@ -1,28 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import rootReducer from './api';
 
 import './index.scss';
 import App from './App';
 
-const initialState = {};
-
-const store = createStore(
-  rootReducer,
-  initialState,
-  compose(applyMiddleware(thunk))
-);
+import UserProvider from './User';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
+  <BrowserRouter>
+    <UserProvider>
       <App />
-    </BrowserRouter>
-    ,
-  </Provider>,
+    </UserProvider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
