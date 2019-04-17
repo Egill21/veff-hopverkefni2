@@ -2,10 +2,10 @@
 
 .register {
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-    margin: $gutter;
+    &__col {
+    @include columns(3);
+    margin: $gutter 0;
+    padding: 0;
   }
 
   &__title {
@@ -13,8 +13,17 @@
     margin-bottom: $gutter / 2;
   }
 
+  &__input {
+    line-height: 2em;
+  }
+
+  &__input input {
+    height: 30px;
+    margin: 2px 0;
+  }
+
   &__button {
-    margin: $gutter / 2 0 $gutter;
+    margin: $gutter / 2 0 0;
   }
 
   &__login {

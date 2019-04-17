@@ -2,10 +2,10 @@
 
 .login {
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-    margin: $gutter;
+  &__col {
+    @include columns(3);
+    margin: $gutter 0;
+    padding: 0;
   }
 
   &__title {

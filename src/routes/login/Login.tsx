@@ -33,11 +33,11 @@ export default function Login() {
           );
         }
         return (
-          <div className="login__container">
+          <div className="login__col">
             <h1 className="login__title">Innskráning</h1>
-            {message && 
+            {message &&
               <Fragment>
-                {message.errors && 
+                {message.errors &&
                   message.errors.map((singleError, i) => {
                     return <p key={i}>{`${singleError.field}, ${singleError.error}`}</p>;
                   })
