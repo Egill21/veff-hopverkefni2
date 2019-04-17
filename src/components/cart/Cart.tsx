@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import Input from '../input/Input';
 import Button from '../button/Button';
+import Cartline from '../cartline/Cartline';
 import { getCart, deleteFromCart } from '../../api/index';
 import { ICart } from '../../api/types';
 import './Cart.scss';
@@ -34,47 +35,19 @@ export default function Cart(props: { token: string | null }) {
   }, []);
 
   return (
-    <div className="cart__col">
+    <Fragment>
       {cart &&
         cart.lines.map((cartline, i) => {
           return (
-            <div className="cart__product" key={i}>
-              <img className="cart__image" src={cartline.image} />
-              <div className="cart__info">
-                <div className="cart__info--left">
-                  <h2 className="cart__title">{cartline.title}</h2>
-                  <p>{`Verð: ${cartline.price} kr.-`}</p>
-                </div>
-                <div className="cart__info--right">
-                  <div className="cart__quantity">
-                    <p>Fjöldi:</p>
-                    <input type="number" className="cart__quantity--input" placeholder={String(cartline.quantity)} />
-                    <Button className="cart__update" children="Uppfæra" />
-                  </div>
-                  <p className="cart__amount">{`Samtals: ${cartline.total} kr.-`}</p>
-                  <Button className="cart__delete" children="Eyða línu" />
-                </div>
-              </div>
-            </div>
+            <Cartline key={i} line={cartline} />
           );
-        })
-      }
+        })}
       <div className="cart__input">
         <h2>Senda inn pöntun</h2>
-        <Input
-          text="Nafn:"
-          type="text"
-          name="name"
-        />
-        <Input
-          text="Heimilisfang:"
-          type="text"
-          name="address"
-        />
+        <Input text="Nafn:" type="text" name="name" />
+        <Input text="Heimilisfang:" type="text" name="address" />
       </div>
-      <Button className="cart__button">
-        Senda inn pöntun
-      </Button>
-    </div>
+      <Button className="cart__button">Senda inn pöntun</Button>
+    </Fragment>
   );
 }
