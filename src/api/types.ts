@@ -99,6 +99,10 @@ export interface ISingleError {
   error: string;
 }
 
+export interface INotFound {
+  error: string;
+}
+
 export interface Links {
   self: Self;
   prev: Prev;
