@@ -6,13 +6,13 @@ import Button from './../../components/button/Button';
 import { post2 } from '../../api/index';
 
 import './Register.scss';
-import { ISingleError } from '../../api/types';
+import { IFieldError } from '../../api/types';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState<Array<ISingleError>>([]);
+  const [errors, setErrors] = useState<Array<IFieldError>>([]);
 
   let status = 200;
   let errorMessages;
@@ -40,7 +40,7 @@ export default function Register() {
     status = response.status;
     console.log('TCL: makeUser -> status', status);
     if (status !== 200) {
-      const final: ISingleError[] = response.response.errors;
+      const final: IFieldError[] = response.response.errors;
       console.log(final);
       setErrors(final);
     }
@@ -50,7 +50,7 @@ export default function Register() {
       <div className="register__col">
         <h1 className="register__title">Nýskráning</h1>
         {errors &&
-          errors.map((i: ISingleError, index: number) => {
+          errors.map((i: IFieldError, index: number) => {
             return (
               <label className="register__errors__item" key={index}>
                 {i.field}: {i.error}

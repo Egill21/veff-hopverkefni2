@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { ICart } from '../../api/types';
 import { getOrder } from '../../api/index';
 
+import Error from '../../routes/system-pages/Error';
+
 import './Userorder.scss';
 
 export default function Userorder(props: { token: string, id: string }) {
@@ -11,11 +13,27 @@ export default function Userorder(props: { token: string, id: string }) {
   const { token, id } = props;
 
   const [order, setOrder] = useState<ICart | null>(null);
+  const [isNotFound, setisNotFound] = useState<boolean>(false);
+  const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
+  const [isError, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   async function fetchData() {
     setLoading(true);
-    const data = await getOrder(token, id);
+    const data: any = await getOrder(token, id);
+    
+    if (data === 'Not Found') {
+      setisNotFound(true);
+    }
+
+    if (data === 'No Access') {
+      setIsNoAccess(true);
+    }
+
+    if (data === 'Error') {
+      setError(true);
+    }
+    
     setOrder(data);
     setLoading(false);
   }
@@ -23,6 +41,21 @@ export default function Userorder(props: { token: string, id: string }) {
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (isNotFound) {
+    const error: string = 'Pöntun fannst ekki';
+    return <Error type="Not Found" errorMSG={error} />;
+  }
+
+  if (isNoAccess) {
+    const error: string = 'Þú hefur ekki aðgang að þessari síðu';
+    return <Error type="No Access" errorMSG={error} />;
+  }
+
+  if (isError) {
+    const error: string = 'Eitthvað fór úrskeiðis';
+    return <Error type="Error" errorMSG={error} />;
+  }
 
   return (
     <Fragment>

@@ -88,18 +88,18 @@ export interface IUser {
 }
 
 export interface ILogInError {
-  errors: ISingleError[];
+  errors: IFieldError[];
   loggedin?: boolean;
   user?: IUser;
   token?: string;
 }
 
-export interface ISingleError {
+export interface IFieldError {
   field: string;
   error: string;
 }
 
-export interface INotFound {
+export interface ISingleError {
   error: string;
 }
 

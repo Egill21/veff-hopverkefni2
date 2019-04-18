@@ -9,7 +9,7 @@ import {
   ICartline,
   IOrder,
   IOrders,
-  INotFound,
+  ISingleError,
 } from './types';
 
 // Sækja slóð á API úr env
@@ -172,7 +172,7 @@ async function logOut() {
   localStorage.removeItem('token');
 }
 
-async function getCart(token: string): Promise<ICart | INotFound> {
+async function getCart(token: string): Promise<ICart | ISingleError> {
   const url = new URL(`${baseurl}cart`);
   const response = await fetch(url.href, {
     method: 'GET',
@@ -259,14 +259,28 @@ async function getOrders(token: string | null):Promise<IOrders> {
   return response.json();
 }
 
-async function getOrder(token: string, id: string):Promise<ICart> {
+async function getOrder(token: string, id: string):Promise<ICart | string> {
   const url = new URL(id, `${baseurl}orders/`);
   const response = await fetch(url.href, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
-  return response.json();
+  console.log(response.status);
+
+  if (response.status === 200) {
+    return response.json();
+  }
+
+  if (response.status === 404) {
+    return 'Not Found';
+  }
+
+  if (response.status === 401) {
+    return 'No Access';
+  }
+
+  return 'Error';
 }
 
 export {

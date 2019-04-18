@@ -4,7 +4,7 @@ import Input from '../input/Input';
 import Button from '../button/Button';
 import Cartline from '../cartline/Cartline';
 import { getCart, deleteFromCart, updateCart, createOrder } from '../../api/index';
-import { ICart, INotFound } from '../../api/types';
+import { ICart, ISingleError,  } from '../../api/types';
 import './Cart.scss';
 
 export default function Cart(props: { token: string }) {
@@ -18,7 +18,7 @@ export default function Cart(props: { token: string }) {
 
   async function fetchData() {
     setLoading(true);
-    const data: ICart | INotFound = await getCart(token);
+    const data: ICart | ISingleError = await getCart(token);
     setCart(data);
     console.log(data);
     console.log(token);
