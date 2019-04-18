@@ -3,7 +3,6 @@
   --max_width: 1400px;
   --columns: 12;
   --gutter: 30px;
-  --color: hsla(204, 80%, 72%, 0.25);
   --repeating-width: calc(100% / var(--columns));
   --column-width: calc((100% / var(--columns)) - var(--gutter));
   --background-width: calc(100% + var(--gutter));

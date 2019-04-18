@@ -1,7 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { ICart } from '../../api/types';
 import { getOrder } from '../../api/index';
+
+import './Userorder.scss';
 
 export default function Userorder(props: { token: string, id: string }) {
 
@@ -26,9 +29,50 @@ export default function Userorder(props: { token: string, id: string }) {
       {!loading &&
         <Fragment>
           {order &&
-            <Fragment>
-              <h2>Pöntun #{order.id}</h2>
-            </Fragment>
+            <div className="userorder__row">
+              <div className="userorder__col">
+                <h1 className="userorder__heading">Pöntun #{order.id}</h1>
+                <div className="userorder__userinfo">
+                  <div className="userorder__userinfo--label">
+                    <label>Nafn</label>
+                    <label>Heimilisfang</label>
+                    <label>Búin til</label>
+                  </div>
+                  <div>
+                    <p>{order.name}</p>
+                    <p>{order.address}</p>
+                    <p>{order.created}</p>
+                  </div>
+                </div>
+                <table className="userorder__table">
+                  <tbody>
+                    <tr>
+                      <th>Vara</th>
+                      <th>Verð</th>
+                      <th>Fjöldi</th>
+                      <th>Samtals</th>
+                    </tr>
+                    {order.lines.map((line, i) => {
+                      return (
+                        <tr key={i}>
+                          <td><Link to={`/product/${line.product_id}`}>{line.title}</Link></td>
+                          <td>{line.price} kr.-</td>
+                          <td>{line.quantity}</td>
+                          <td>{line.total}</td>
+                        </tr>
+                      )
+                    })}
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{order.total} kr.-</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p className="userorder__backlink" ><Link to="/orders">Aftur í pantanir</Link></p>
+              </div>
+            </div>
           }
         </Fragment>
       }
