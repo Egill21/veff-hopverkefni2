@@ -24,11 +24,11 @@ export default function Header() {
               <div className="header__navigation">
                 {!user && (
                   <Fragment>
-                    <NavLink className="header__link" exact to="/register">
-                      Nýskrá
+                    <NavLink activeClassName="header__link--selected" exact to="/register">
+                      <p className="header__link">Nýskrá</p>
                     </NavLink>
-                    <NavLink className="header__link" exact to="/login">
-                      Innskrá
+                    <NavLink activeClassName="header__link--selected" exact to="/login">
+                      <p className="header__link">Innskrá</p>
                     </NavLink>
                   </Fragment>
                 )}
@@ -36,25 +36,25 @@ export default function Header() {
                   <Fragment>
                     <NavLink
                       onClick={() => loggingOut(loggoutUser)}
-                      className="header__link"
+                      activeClassName="header__link--selected"
                       exact
                       to="/login"
                     >
-                      {user.username} (útskrá)
+                      <p className="header__link">{user.username} (útskrá)</p>
                     </NavLink>
-                    <NavLink className="header__link" exact to="/orders" >
-                      Pantanir
+                    <NavLink activeClassName="header__link--selected" exact to="/orders" >
+                      <p className="header__link">Pantanir</p>
                     </NavLink>
                   </Fragment>
                 )}
-                <NavLink className="header__link" exact to="/cart">
-                  Karfa
+                <NavLink activeClassName="header__link--selected" exact to="/cart">
+                  <p className="header__link">Karfa</p>
                 </NavLink>
-                <NavLink className="header__link selected" exact to="/cart">
-                  Nýjar vörur
+                <NavLink activeClassName="header__link--selected" exact to="/">
+                  <p className="header__link">Nýjar vörur</p>
                 </NavLink>
-                <NavLink className="header__link" exact to="/categories">
-                  Flokkar
+                <NavLink activeClassName="header__link--selected" exact to="/categories">
+                  <p className="header__link">Flokkar</p>
                 </NavLink>
               </div>
             </div>

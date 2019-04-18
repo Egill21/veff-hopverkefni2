@@ -45,7 +45,7 @@
     justify-content: flex-start;
     color: $color-background;
     font-family: $font-main;
-    width: 240px;
+    width: 300px;
     
     padding-right: $gutter / 2;
     padding-left: $gutter / 2;
@@ -63,11 +63,15 @@
     margin: 0 $gutter / 4 $gutter / 4;
     color: $color-background;
     text-decoration: none;
-  }
-}
 
-.selected {
-  color: $color-background;
-  text-decoration: none;
-  font-weight: bold;
+    &--selected {
+      font-weight: bold;
+      color: $color-background;
+      text-decoration: none;
+    }
+  }
+
+  &__link:visited {
+    text-decoration: none;
+  }
 }

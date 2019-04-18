@@ -48,12 +48,12 @@ export default function Cart(props: { token: string }) {
 
   function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
-		console.log("TCL: onNameChange -> e.target.value", e.target.value)
+    console.log("TCL: onNameChange -> e.target.value", e.target.value)
   }
 
   function onAddressChange(e: React.ChangeEvent<HTMLInputElement>) {
     setAddress(e.target.value);
-		console.log("TCL: onAddressChange -> e.target.value", e.target.value)
+    console.log("TCL: onAddressChange -> e.target.value", e.target.value)
   }
 
   useEffect(() => {
@@ -62,10 +62,10 @@ export default function Cart(props: { token: string }) {
 
   return (
     <Fragment>
-      {loading && 
+      {loading &&
         <p>Hleð gögnum...</p>
       }
-      {!loading && 
+      {!loading &&
         <Fragment>
           {orderSent &&
             <p>Pöntun hefur verið send!</p>
@@ -81,19 +81,21 @@ export default function Cart(props: { token: string }) {
                           <Cartline key={i} line={cartline} token={token} deleteLine={deleteLine} updateLine={updateLine} />
                         );
                       })}
-                      <div className="cart__input">
-                        <h2>Senda inn pöntun</h2>
-                        <Input onChange={onNameChange} text="Nafn:" type="text" name="name" />
-                        <Input onChange={onAddressChange} text="Heimilisfang:" type="text" name="address" />
+                      <div className="cart__col">
+                        <div className="cart__input">
+                          <h2 className="cart__title">Senda inn pöntun</h2>
+                          <Input onChange={onNameChange} text="Nafn:" type="text" name="name" />
+                          <Input onChange={onAddressChange} text="Heimilisfang:" type="text" name="address" />
+                          <Button onClick={order} className="cart__button">Senda inn pöntun</Button>
+                        </div>
                       </div>
-                      <Button onClick={order} className="cart__button">Senda inn pöntun</Button>
                     </Fragment>
                   }
-                  {cart.error && 
+                  {cart.error &&
                     <p>Engin karfa hér!!</p>
                   }
                 </Fragment>
-                }
+              }
             </Fragment>
           }
         </Fragment>

@@ -4,7 +4,7 @@
 
   &__row {
     @include row;
-    margin-bottom: $gutter * 2;
-    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
   }
 }
