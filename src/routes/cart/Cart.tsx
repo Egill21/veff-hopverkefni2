@@ -12,7 +12,7 @@ export default function Cart() {
     <Context.Consumer>
       {({ token }) => {
         if (!token) {
-          return ( <NoAccess /> );
+          return (<NoAccess />);
         } else {
           return (
             <div className="cart__row">

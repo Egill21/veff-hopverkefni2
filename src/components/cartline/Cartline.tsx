@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import Input from '../input/Input';
 import Button from '../button/Button';
 import { getCart, deleteFromCart } from '../../api/index';
 import { ICart, ICartline } from '../../api/types';
-import '../cart/Cart.scss';
+import './Cartline.scss';
 
 export default function Cartline(props: { line: ICartline, token: string | null, deleteLine: any, updateLine: any }) {
 
@@ -23,32 +23,32 @@ export default function Cartline(props: { line: ICartline, token: string | null,
   }
 
   return (
-    <div className="cart__col">
-    <div className="cart__product">
-      <img className="cart__image" src={line.image} />
-      <div className="cart__info">
-        <div className="cart__info--left">
-          <h2 className="cart__title">{line.title}</h2>
+    <div className="cartline__product">
+      <div className="cartline__imgcont">
+        <img className="cartline__image" src={line.image} />
+      </div>
+      <div className="cartline__info">
+        <div>
+          <h2 className="cartline__title">{line.title}</h2>
           <p>{`Verð: ${line.price} kr.-`}</p>
         </div>
-        <div className="cart__info--right">
-          <div className="cart__quantity">
+        <div className="cartline__info--right">
+          <div className="cartline__quantity">
             <p>Fjöldi:</p>
             <input
               type="number"
-              className="cart__quantity--input"
+              className="cartline__quantity--input"
               value={quantity}
               onChange={updateQuantity}
             />
-            <Button onClick={() => updateLine(line.id, quantity, token)} className="cart__update" children="Uppfæra" />
+            <Button onClick={() => updateLine(line.id, quantity, token)} className="cartline__update" children="Uppfæra" />
           </div>
-          <p className="cart__amount">{`Samtals: ${
+          <p className="cartline__amount">{`Samtals: ${
             line.total
-          } kr.-`}</p>
-          <Button onClick={() => deleteLine(line.id, token)} className="cart__delete" children="Eyða línu" />
+            } kr.-`}</p>
+          <Button onClick={() => deleteLine(line.id, token)} className="cartline__delete" children="Eyða línu" />
         </div>
       </div>
     </div>
-  </div>
   );
 }
