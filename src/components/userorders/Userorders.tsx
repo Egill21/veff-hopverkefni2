@@ -26,37 +26,39 @@ export default function Userorders(props: { token: string }) {
   }, []);
 
   return (
-    <Fragment>
-      <h2>Þínar pantanir</h2>
+    <div className="userorders__row">
+      <h1 className="userorders__col">Þínar pantanir</h1>
       {loading &&
         <p>Hleð gögnum...</p>
       }
       {!loading &&
         <Fragment>
           {orders &&
-            <table>
-              <tbody>
-                <tr>
-                  <th>Pöntun</th>
-                  <th>Nafn</th>
-                  <th>Heimilisfang</th>
-                  <th>Búin til</th>
-                </tr>
-                {orders.items.map((order, i) => {
-                  return (
-                    <tr key={i}>
-                      <td><Link to={`/orders/${order.id}`}>Pöntun #{order.id}</Link></td>
-                      <td>{order.name}</td>
-                      <td>{order.address}</td>
-                      <td>{order.created}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+            <div className="userorders__col">
+              <table className="userorders__table">
+                <tbody>
+                  <tr>
+                    <th>Pöntun</th>
+                    <th>Nafn</th>
+                    <th>Heimilisfang</th>
+                    <th>Búin til</th>
+                  </tr>
+                  {orders.items.map((order, i) => {
+                    return (
+                      <tr key={i}>
+                        <td><Link to={`/orders/${order.id}`}>Pöntun #{order.id}</Link></td>
+                        <td>{order.name}</td>
+                        <td>{order.address}</td>
+                        <td>{order.created}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
           }
         </Fragment>
       }
-    </Fragment>
+    </div>
   )
 }
