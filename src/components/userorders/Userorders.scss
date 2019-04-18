@@ -1,0 +1,44 @@
+@import '../../config.scss';
+
+.userorders {
+
+  &__row {
+    @include row;
+    margin-top: $gutter * 2;
+    flex-wrap: wrap;
+  }
+
+  &__col {
+    @include columns(8);
+    @include offset-left(2);
+    margin-bottom: $gutter;
+    font-family: $font-heading;
+  }
+
+
+  &__table {
+    font-family: $font-main;
+    border-collapse: collapse;
+    width: 100%;
+
+    td, th {
+      padding: 8px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: $color-font;
+      color: white;
+    }
+
+    tr:nth-child(odd){background-color: $color-gray;}
+
+  }
+
+}

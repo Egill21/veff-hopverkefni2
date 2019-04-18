@@ -1,0 +1,74 @@
+@import '../../config.scss';
+
+.userorder {
+
+  &__row {
+    @include row;
+    margin-top: $gutter * 2;
+    flex-wrap: wrap;
+  }
+
+  &__col {
+    @include columns(8);
+    @include offset-left(2);
+    margin-bottom: $gutter;
+  }
+
+  &__heading {
+    font-family: $font-heading;
+    margin-bottom: $gutter;
+  }
+
+  &__userinfo {
+    // @include columns(8);
+    font-family: $font-main;
+    margin-bottom: $gutter;
+    margin-right: $gutter*8;
+    display: flex;
+    justify-content: space-between;
+
+    &--label {
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+    }
+
+  }
+
+  &__table {
+    font-family: $font-main;
+    border-collapse: collapse;
+    width: 100%;
+
+    td, th {
+      padding: 8px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: $color-font;
+      color: white;
+    }
+
+    tr:nth-child(odd){background-color: $color-gray;}
+    tr:last-child{
+      background-color: white ;
+      font-weight: bold;
+    }
+
+  }
+
+  &__backlink {
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+
+}
