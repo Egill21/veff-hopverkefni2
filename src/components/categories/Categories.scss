@@ -1,6 +1,12 @@
 @import '../../config.scss';
 
 .categories {
+  &__row {
+    @include row;
+    margin-bottom: $gutter * 2;
+    margin-top: $gutter;
+    flex-wrap: wrap;
+  }
 
   &__col {
     display: flex;
@@ -17,6 +23,13 @@
     }
   }
 
+  &__subheading {
+    font-family: $font-heading;
+    margin-top: $gutter;
+    font-weight: 700;
+    margin-bottom: $gutter;
+  }
+
   &__category {
     display: flex;
     flex-direction: column;
@@ -28,18 +41,15 @@
     font-size: 2.5rem;
     border: 1px solid #000;
     text-align: center;
+    text-decoration: none;
 
-    &__back {
-      background: green;
-      transition:
-        color $transition,
-        background-color $transition,
-        border-color $transition;
-
-      &:hover {
+    &:hover {
+      p {
         color: $color-background;
-        background-color: $color-font;
       }
+      background-color: $color-font;
+      transition: color $transition, background-color $transition,
+        border-color $transition;
     }
   }
 

@@ -33,22 +33,19 @@ export default function Home() {
   return (
     <Fragment>
       <Helmet title="Forsíða" />
-      {loading &&
-        <p>Hleð gögnum...</p>
-      }
-      {!loading &&
+      {loading && <p>Hleð gögnum...</p>}
+      {!loading && (
         <Fragment>
           <h2 className="home__heading">Nýjar vörur</h2>
           <div className="home__row">
             {products && <Products productList={products} />}
             <Button className="home__button">Skoða alla flokka</Button>
           </div>
-          <h2 className="home__subheading">Skoðaðu vöruflokkana okkar</h2>
-          <div className="home__row">
-            {categories && <Categories isFrontPage={true} categorieList={categories} />}
-          </div>
+          {categories && (
+            <Categories isFrontPage={true} categorieList={categories} />
+          )}
         </Fragment>
-      }
+      )}
     </Fragment>
   );
 }

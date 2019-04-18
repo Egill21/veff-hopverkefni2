@@ -31,7 +31,10 @@ export default function Category(props: any) {
 
   async function fetchNewData(slug: string, pageChange: number) {
     setLoading(true);
-    const newProducts: IProducts | null = await getPagedProducts(categoryID, slug);
+    const newProducts: IProducts | null = await getPagedProducts(
+      categoryID,
+      slug
+    );
     setPage(page + pageChange);
     setProducts(newProducts);
     setLoading(false);
@@ -40,7 +43,10 @@ export default function Category(props: any) {
   async function searchData(slug: string) {
     setLoading(true);
     setSearchInput(inputBox);
-    const newProducts: IProducts | null = await getPagedProducts(categoryID, `${slug}&search=${inputBox}`);
+    const newProducts: IProducts | null = await getPagedProducts(
+      categoryID,
+      `${slug}&search=${inputBox}`
+    );
     setProducts(newProducts);
     setLoading(false);
   }
@@ -57,34 +63,57 @@ export default function Category(props: any) {
     <div className="category">
       {products && (
         <Fragment>
-          {category && 
+          {category && (
             <Fragment>
               <Helmet title={category.title} />
               <h2 className="category__heading">{category.title}</h2>
             </Fragment>
-          }
+          )}
           <div className="category__searchContainer">
-            <label className="category__searchlabel" >Leita:</label>
-            <input onChange={onChange} className="category__searchInput" type="text"></input>
-            <button onClick={() => searchData(products._links.self.href)} className="category__searchButton" >Leita</button>
+            <label className="category__searchlabel">Leita:</label>
+            <input
+              onChange={onChange}
+              className="category__searchInput"
+              type="text"
+            />
+            <button
+              onClick={() => searchData(products._links.self.href)}
+              className="category__searchButton"
+            >
+              Leita
+            </button>
           </div>
-          <Products productList={products.items} />
+          <div className="category__row">
+            <Products productList={products.items} />
+          </div>
           <div className="category__pages">
-            {products._links.prev && 
+            {products._links.prev && (
               <button
-                onClick={() => fetchNewData(`${products._links.prev.href}&search=${searchInput}`, -1)} 
-                className="category__pageButton">
+                onClick={() =>
+                  fetchNewData(
+                    `${products._links.prev.href}&search=${searchInput}`,
+                    -1
+                  )
+                }
+                className="category__pageButton"
+              >
                 Fyrri síða
               </button>
-            }
-            <p className="category__currentPage" >Síða {page}</p>
-            {products._links.next &&
+            )}
+            <p className="category__currentPage">Síða {page}</p>
+            {products._links.next && (
               <button
-                onClick={() => fetchNewData(`${products._links.next.href}&search=${searchInput}`, 1)}
-                className="category__pageButton">
+                onClick={() =>
+                  fetchNewData(
+                    `${products._links.next.href}&search=${searchInput}`,
+                    1
+                  )
+                }
+                className="category__pageButton"
+              >
                 Næsta síða
               </button>
-            }
+            )}
           </div>
         </Fragment>
       )}
