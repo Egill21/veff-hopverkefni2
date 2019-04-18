@@ -1,12 +1,31 @@
 @import '../../config.scss';
 
 .category {
-  margin: $gutter;
-  max-width: $max-width;
+  &__row {
+    @include row;
+    margin-bottom: $gutter * 2;
+    flex-wrap: wrap;
+  }
+
+  &__col {
+    display: flex;
+
+    @include columns(12);
+    margin-bottom: $gutter * 2;
+
+    @media (min-width: 600px) {
+      @include columns(6);
+    }
+
+    @media (min-width: 1000px) {
+      @include columns(4);
+    }
+  }
 
   &__heading {
     font-family: $font-heading;
     font-weight: 700;
+    margin-top: $gutter;
   }
 
   &__searchContainer {
@@ -15,7 +34,7 @@
     justify-content: space-between;
 
     width: 100%;
-    max-width: $gutter*10;
+    max-width: $gutter * 10;
   }
 
   &__searchlabel {
@@ -26,7 +45,7 @@
     border: solid 1px $color-gray;
     border-radius: 2px;
     padding: 6px;
-    width: $gutter*6;
+    width: $gutter * 6;
   }
 
   &__searchButton {
@@ -45,10 +64,8 @@
 
     cursor: pointer;
 
-    transition:
-    color $transition,
-    background-color $transition,
-    border-color $transition;
+    transition: color $transition, background-color $transition,
+      border-color $transition;
 
     &:hover {
       color: $color-font;
@@ -81,10 +98,8 @@
 
     cursor: pointer;
 
-    transition:
-    color $transition,
-    background-color $transition,
-    border-color $transition;
+    transition: color $transition, background-color $transition,
+      border-color $transition;
 
     &:hover {
       color: $color-font;
@@ -96,5 +111,4 @@
     margin-right: $gutter/2;
     margin: auto $gutter/2 auto 0;
   }
-
 }
