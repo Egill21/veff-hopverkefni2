@@ -7,6 +7,7 @@ import './Product.scss';
 
 import SingleProduct from '../../components/product/Product';
 import Products from '../../components/products/Products';
+import Error from '../../routes/system-pages/Error';
 
 export default function Product(props: any) {
 
@@ -15,14 +16,23 @@ export default function Product(props: any) {
 
   const [product, setProduct] = useState<IProduct | null>(null);
   const [products, setProducts] = useState<Array<IProduct> | null>([]);
+  const [isNotFound, setisNotFound] = useState<boolean>(false);
+  const [isError, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   async function fetchData() {
     setLoading(true);
-    const myProduct: IProduct = await getProduct(id);
-    const myProducts: IProduct[] | null = await getMoreProducts(myProduct.category_id);
-    setProduct(myProduct);
-    setProducts(myProducts);
+    const data: any = await getProduct(id);
+
+    if (data === 'Not Found') {
+      setisNotFound(true);
+    } else if (data === 'Error') {
+      setError(true);
+    } else {
+      const myProducts: IProduct[] | null = await getMoreProducts(data.category_id);
+      setProduct(data);
+      setProducts(myProducts);
+    }
     setLoading(false);
   }
 
@@ -30,10 +40,24 @@ export default function Product(props: any) {
     fetchData();
   }, []);
 
+  if (isNotFound) {
+    const error: string = 'Vara fannst ekki';
+    return <Error type="Not Found" errorMSG={error} />;
+  }
+
+  if (isError) {
+    const error: string = 'Eitthvað fór úrskeiðis';
+    return <Error type="Error" errorMSG={error} />;
+  }
+
   return (
     <Fragment>
       {loading &&
-        <p>Hleð gögnum...</p>
+        <div className="product__row">
+          <div className="product__col">
+            <h2 className="product__heading">Sæki vöru...</h2>
+          </div>
+        </div>
       }
       {!loading &&
         <Fragment>

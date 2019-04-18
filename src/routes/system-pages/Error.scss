@@ -1,0 +1,32 @@
+@import '../../config.scss';
+
+.error {
+  margin-top: $gutter;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $font-heading;
+
+  a {
+    text-decoration: none;
+    color: white;
+    p {
+      font-family: $font-main;
+      margin-top: $gutter;
+      border: solid 1px $color-gray;
+      border-radius: 4px;
+      background-color: $color-font;
+      padding: 8px;
+
+      transition:
+      color $transition,
+      background-color $transition,
+      border-color $transition;
+
+      &:hover {
+        color: $color-font;
+        background-color: $color-background;
+      }
+    }
+  }
+}

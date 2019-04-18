@@ -33,7 +33,9 @@ export default function Home() {
   return (
     <Fragment>
       <Helmet title="Forsíða" />
-      {loading && <p>Hleð gögnum...</p>}
+      {loading && 
+        <h2 className="home__heading">Sæki gögn...</h2>
+      }
       {!loading && (
         <Fragment>
           <h2 className="home__heading">Nýjar vörur</h2>

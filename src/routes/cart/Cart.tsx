@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AddToCart from '../../components/cart/Cart';
-import NoAccess from '../system-pages/NoAccess';
+import Error from '../system-pages/Error';
 
 import './Cart.scss';
 
@@ -12,7 +12,8 @@ export default function Cart() {
     <Context.Consumer>
       {({ token }) => {
         if (!token) {
-          return (<NoAccess />);
+          const error: string = 'Til þess að skoða körfu þarf að skrá sig inn';
+          return (<Error type="No Access" errorMSG={error} />);
         } else {
           return (
             <div className="cart__row">

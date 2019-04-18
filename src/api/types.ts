@@ -87,19 +87,19 @@ export interface IUser {
   admin: boolean;
 }
 
-export interface ILogInError {
-  errors: ISingleError[];
+export interface IErrorArray {
+  errors: IFieldError[];
   loggedin?: boolean;
   user?: IUser;
   token?: string;
 }
 
-export interface ISingleError {
+export interface IFieldError {
   field: string;
   error: string;
 }
 
-export interface INotFound {
+export interface ISingleError {
   error: string;
 }
 
@@ -124,7 +124,7 @@ export interface IContext {
   authenticated: boolean;
   user: IUser;
   token: string | null;
-  message: ILogInError | null;
+  message: IErrorArray | null;
   logginUser: any;
   loggoutUser: any;
 }

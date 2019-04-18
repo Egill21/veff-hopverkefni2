@@ -9,16 +9,25 @@ import './Product.scss';
 export default function SingleProduct(props: { product: IProduct }) {
   const { product } = props;
 
-  const [input, setInput] = useState<number>(0)
+  const [input, setInput] = useState<number | string>(1);
   const [added, setAdded] = useState<boolean>(false);
 
-  function changeInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setInput(parseInt(e.target.value));
+
+  function updateQuantity(e: React.ChangeEvent<HTMLInputElement>) {
+    const inputValue = parseInt(e.target.value);
+    const value = isNaN(inputValue) ? '' : inputValue;
+    if (typeof value === 'number' && value < 1) {
+      setInput(1);
+    } else {
+      setInput(value);
+    }
   }
 
-  async function addItem(quantity: number, token: string | null): Promise<void> {
-    await addToCart(product.id, quantity, token);
-    setAdded(true);
+  async function addItem(quantity: number | string, token: string | null): Promise<void> {
+    if (typeof quantity === 'number') {
+      await addToCart(product.id, quantity, token);
+      setAdded(true);
+    }
   }
 
   const desc = product.description;
@@ -52,7 +61,7 @@ export default function SingleProduct(props: { product: IProduct }) {
                 {user &&
                   <div className="product__loggedinContainer">
                     <label className="product__loggedinLabel">Fjöldi</label>
-                    <input onChange={changeInput} className="product__loggedinInput" type="number" ></input>
+                    <input onChange={updateQuantity} value={input} className="product__loggedinInput" type="number" ></input>
                     <button onClick={() => addItem(input, token)} className="product__loggedinButton">Bæta við körfu</button>
                     {added && <p>Bætt við körfu!</p>}
                   </div>

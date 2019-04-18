@@ -4,22 +4,30 @@ import {
   ICategory,
   ICategories,
   IlogInInfo,
-  ILogInError,
+  IErrorArray,
   ICart,
   ICartline,
   IOrder,
   IOrders,
-  INotFound,
+  ISingleError,
 } from './types';
 
 // Sækja slóð á API úr env
 const baseurl: string | undefined = process.env.REACT_APP_API_URL;
 
-async function getProduct(id: number | string): Promise<IProduct> {
+async function getProduct(id: number | string): Promise<IProduct | string> {
   const url = new URL(String(id), `${baseurl}products/`);
   const response = await fetch(url.href);
 
-  return response.json();
+  if (response.status === 200) {
+    return response.json();
+  }
+
+  if (response.status === 404) {
+    return 'Not Found';
+  }
+
+  return 'Error';
 }
 
 async function getProducts(limit?: number): Promise<Array<IProduct> | null> {
@@ -96,7 +104,7 @@ async function getCategory(id: number): Promise<ICategory | null> {
 async function login(
   userName: string,
   password: string
-): Promise<IlogInInfo | ILogInError | null> {
+): Promise<IlogInInfo | IErrorArray | null> {
   const url = new URL(`${baseurl}users/login`);
   const response = await fetch(url.href, {
     method: 'POST',
@@ -172,7 +180,7 @@ async function logOut() {
   localStorage.removeItem('token');
 }
 
-async function getCart(token: string): Promise<ICart | INotFound> {
+async function getCart(token: string): Promise<ICart | string> {
   const url = new URL(`${baseurl}cart`);
   const response = await fetch(url.href, {
     method: 'GET',
@@ -182,7 +190,21 @@ async function getCart(token: string): Promise<ICart | INotFound> {
       'Authorization': `Bearer ${token}`
     }
   });
-  return await response.json();
+
+  if (response.status === 200) {
+    return response.json();
+  }
+
+  if (response.status === 404) {
+    return 'Not Found';
+  }
+
+  if (response.status === 401) {
+    return 'No Access';
+  }
+
+  return 'Error';
+
 }
 
 async function addToCart(
@@ -205,7 +227,7 @@ async function addToCart(
   });
 }
 
-async function updateCart(lineID: number, quantity: number, token: string | null):Promise<ICartline | ILogInError> {
+async function updateCart(lineID: number, quantity: number, token: string | null):Promise<ICartline | IErrorArray> {
   const url = new URL(`${baseurl}cart/line/${lineID}`);
   const response = await fetch(url.href, {
     method: 'PATCH',
@@ -233,9 +255,9 @@ async function deleteFromCart(lineID: number, token: string | null):Promise<void
   });
 }
 
-async function createOrder(name: string, address: string, token: string | null):Promise<void> {
+async function createOrder(name: string, address: string, token: string | null):Promise<string | IErrorArray> {
   const url = new URL(`${baseurl}orders`);
-  await fetch(url.href, {
+  const response = await fetch(url.href, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -247,6 +269,20 @@ async function createOrder(name: string, address: string, token: string | null):
       address: address
     })
   });
+
+  if (response.status === 400) {
+    return response.json();
+  }
+
+  if (response.status === 201) {
+    return 'Success';
+  }
+  
+  if (response.status === 401) {
+    return 'No Access';
+  }
+
+  return 'Not Found';
 }
 
 async function getOrders(token: string | null):Promise<IOrders> {
@@ -259,14 +295,27 @@ async function getOrders(token: string | null):Promise<IOrders> {
   return response.json();
 }
 
-async function getOrder(token: string, id: string):Promise<ICart> {
+async function getOrder(token: string, id: string):Promise<ICart | string> {
   const url = new URL(id, `${baseurl}orders/`);
   const response = await fetch(url.href, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
-  return response.json();
+
+  if (response.status === 200) {
+    return response.json();
+  }
+
+  if (response.status === 404) {
+    return 'Not Found';
+  }
+
+  if (response.status === 401) {
+    return 'No Access';
+  }
+
+  return 'Error';
 }
 
 export {

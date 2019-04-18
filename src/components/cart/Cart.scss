@@ -15,4 +15,9 @@
     font-family: $font-heading;
     font-weight: bold;
   }
+
+  &__nocart {
+    font-family: $font-heading;
+    margin-top: $gutter;
+  }
 }
