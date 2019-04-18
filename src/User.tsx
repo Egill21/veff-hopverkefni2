@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { login } from './api/index';
-import { IlogInInfo, ILogInError, IContext} from './api/types';
+import { IlogInInfo, IErrorArray, IContext} from './api/types';
 
 // Ef það er notandi í localStorage erum við með innskráðan notanda
 // hér gætum við líka sótt token
@@ -28,7 +28,7 @@ export default class User extends Component {
 
   logginUser:any = async (username: string, password: string) => {
     this.setState({ fetching: true });
-    let loginUser : IlogInInfo | ILogInError | null = null;
+    let loginUser : IlogInInfo | IErrorArray | null = null;
     try {
       loginUser = await login(username, password);
     } catch (e) {

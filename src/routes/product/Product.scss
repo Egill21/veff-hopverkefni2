@@ -8,6 +8,11 @@
     flex-wrap: wrap;
   }
 
+  &__col {
+    @include columns(12);
+    margin: $gutter * 2 0 $gutter;
+  }
+
   &__heading {
     margin-bottom: $gutter / 2;
     font-family: $font-heading;
