@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Input from './../../components/input/Input';
@@ -27,7 +27,7 @@ export default function Login() {
 
   return (
     <Context.Consumer>
-      {({ logginUser, message, user }) => {
+      {({ logginUser, message, message2, user }) => {
         if (user) {
           return (
             <Home />
@@ -37,13 +37,12 @@ export default function Login() {
           <div className="login__col">
             <h1 className="login__title">Innskráning</h1>
             {message &&
-              <Fragment>
-                {message.errors &&
-                  message.errors.map((singleError, i) => {
-                    return <p key={i}>{`${singleError.field}, ${singleError.error}`}</p>;
-                  })
-                }
-              </Fragment>
+              message.map((singleError:any, i:any) => {
+                return <p key={i}>{`${singleError.field}, ${singleError.error}`}</p>;
+              })
+            }
+            {message2 &&
+              <p>{message2.error}</p>
             }
             <div className="login__input">
               <Input

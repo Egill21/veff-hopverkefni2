@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { login } from './api/index';
-import { IlogInInfo, IErrorArray, IContext} from './api/types';
+import { IContext } from './api/types';
 
-// Ef það er notandi í localStorage erum við með innskráðan notanda
-// hér gætum við líka sótt token
 const user = JSON.parse(localStorage.getItem('user') || 'null');
 const token = JSON.parse(localStorage.getItem('token') || 'null');
 
@@ -13,6 +11,7 @@ export const Context = React.createContext<IContext>({
   user: user,
   token: token,
   message: null,
+  message2: null,
   logginUser: () => {},
   loggoutUser: () => {},
 });
@@ -22,39 +21,35 @@ export default class User extends Component {
     fetching: false,
     authenticated: !!user,
     message: null,
+    message2: null,
     user: user,
     token: token,
   }
 
   logginUser:any = async (username: string, password: string) => {
     this.setState({ fetching: true });
-    let loginUser : IlogInInfo | IErrorArray | null = null;
-    try {
-      loginUser = await login(username, password);
-    } catch (e) {
-      this.setState({ message: {
-        errors: [{
-          field: 'Username',
-          error: 'No such user'
-        }]
-      }});
+
+    const loginUser = await login(username, password);
+
+    if (loginUser && !loginUser.user) {
+      if (Array.isArray(loginUser)) {
+        this.setState({ message: loginUser, message2: null, fetching: false });
+      } else {
+        this.setState({ message: null, message2: loginUser, fetching: false });
+      }
     }
 
-    if (loginUser && !loginUser.loggedin) {
-      this.setState({ message: loginUser, fetching: false });
-    }
-
-    if (loginUser && loginUser.loggedin) {
+    if (loginUser && loginUser.user) {
       const { user, token } = loginUser;
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', JSON.stringify(token));
-      this.setState({ user, token, fetching: false, authenticated: true });
+      this.setState({ user, token, fetching: false, authenticated: true, message: null, message2: null });
     }
   };
 
   loggoutUser = async () => {
     localStorage.removeItem('user');
-    console.log('removing user');
+    localStorage.removeItem('token');
     this.setState({ user: null, token: null });
   };
 

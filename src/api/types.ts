@@ -124,7 +124,8 @@ export interface IContext {
   authenticated: boolean;
   user: IUser;
   token: string | null;
-  message: IErrorArray | null;
+  message: any;
+  message2: any;
   logginUser: any;
   loggoutUser: any;
 }

@@ -6,6 +6,8 @@ import Categories from '../../components/categories/Categories';
 
 import { getCategories } from '../../api/index';
 
+import '../../components/categories/Categories.scss';
+
 export default function CategoriesRoute() {
 
   const [categories, setCategories] = useState<Array<ICategory> | null>([]);
@@ -25,7 +27,7 @@ export default function CategoriesRoute() {
   return (
     <Fragment>
       {loading &&
-        <p>Hleð gögnum...</p>
+        <h2 className="loading">Sæki flokka...</h2>
       }
       {!loading &&
         <div className="categories">
