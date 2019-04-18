@@ -9,6 +9,7 @@ import {
   ICartline,
   IOrder,
   IOrders,
+  INotFound,
 } from './types';
 
 // Sækja slóð á API úr env
@@ -171,8 +172,7 @@ async function logOut() {
   localStorage.removeItem('token');
 }
 
-async function getCart(token: string): Promise<ICart> {
-  console.log(token);
+async function getCart(token: string): Promise<ICart | INotFound> {
   const url = new URL(`${baseurl}cart`);
   const response = await fetch(url.href, {
     method: 'GET',

@@ -4,25 +4,24 @@ import Input from '../input/Input';
 import Button from '../button/Button';
 import Cartline from '../cartline/Cartline';
 import { getCart, deleteFromCart, updateCart, createOrder } from '../../api/index';
-import { ICart } from '../../api/types';
+import { ICart, INotFound } from '../../api/types';
 import './Cart.scss';
 
-export default function Cart(props: { token: string | null }) {
+export default function Cart(props: { token: string }) {
   const { token } = props;
 
   const [loading, setLoading] = useState(false);
-  const [cart, setCart] = useState<ICart | null>(null);
+  const [cart, setCart] = useState<any>(null);
   const [orderSent, setOrderSent] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
   const [address, setAddress] = useState<string>('');
 
   async function fetchData() {
     setLoading(true);
-    if (token !== null) {
-      const data: ICart = await getCart(token);
-      setCart(data);
-      console.log(data);
-    }
+    const data: ICart | INotFound = await getCart(token);
+    setCart(data);
+    console.log(data);
+    console.log(token);
     setLoading(false);
   }
 
@@ -74,23 +73,31 @@ export default function Cart(props: { token: string | null }) {
           {!orderSent &&
             <Fragment>
               {cart &&
-                cart.lines.map((cartline, i) => {
-                  return (
-                    <Cartline key={i} line={cartline} token={token} deleteLine={deleteLine} updateLine={updateLine} />
-                  );
-                })}
-              <div className="cart__input">
-                <h2>Senda inn pöntun</h2>
-                <Input onChange={onNameChange} text="Nafn:" type="text" name="name" />
-                <Input onChange={onAddressChange} text="Heimilisfang:" type="text" name="address" />
-              </div>
-              <Button onClick={order} className="cart__button">Senda inn pöntun</Button>
+                <Fragment>
+                  {cart.lines &&
+                    <Fragment>
+                      {cart.lines.map((cartline: any, i: any) => {
+                        return (
+                          <Cartline key={i} line={cartline} token={token} deleteLine={deleteLine} updateLine={updateLine} />
+                        );
+                      })}
+                      <div className="cart__input">
+                        <h2>Senda inn pöntun</h2>
+                        <Input onChange={onNameChange} text="Nafn:" type="text" name="name" />
+                        <Input onChange={onAddressChange} text="Heimilisfang:" type="text" name="address" />
+                      </div>
+                      <Button onClick={order} className="cart__button">Senda inn pöntun</Button>
+                    </Fragment>
+                  }
+                  {cart.error && 
+                    <p>Engin karfa hér!!</p>
+                  }
+                </Fragment>
+                }
             </Fragment>
           }
         </Fragment>
       }
-
-
     </Fragment>
   );
 }
