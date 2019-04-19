@@ -1,7 +1,6 @@
 @import '../../config.scss';
 
 .cart {
-
   &__col {
     @include columns(8);
     @include offset-left(2);
@@ -26,7 +25,7 @@
   &__input input {
     height: 30px;
     margin: 2px 0;
-    border: 1px solid #ccc;
+    //border: 1px solid #ccc;
   }
 
   &__title {

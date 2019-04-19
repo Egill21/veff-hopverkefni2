@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import Helmet from "react-helmet";
 
 import { getCategories } from "../../api/index";
 import { ICategory } from "../../api/types";
@@ -24,6 +25,7 @@ export default function CategoriesRoute() {
 
   return (
     <Fragment>
+      <Helmet title="Flokkar" />
       {loading &&
         <h2 className="loading">Sæki flokka...</h2>
       }
