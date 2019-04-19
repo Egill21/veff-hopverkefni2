@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import Helmet from 'react-helmet';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import React from "react";
+import Helmet from "react-helmet";
+import { Route, Switch, withRouter } from "react-router-dom";
 
-import Header from './components/header/Header';
+import Header from "./components/header/Header";
 
-import Home from './routes/home/Home';
-import Register from './routes/register/Register';
-import Login from './routes/login/Login';
-import Categories from './routes/categories/Categories';
-import Category from './routes/category/Category';
-import Product from './routes/product/Product';
-import Cart from './routes/cart/Cart';
-import Orders from './routes/orders/Orders';
-import Order from './routes/orders/Order';
+import Cart from "./routes/cart/Cart";
+import Categories from "./routes/categories/Categories";
+import Category from "./routes/category/Category";
+import Home from "./routes/home/Home";
+import Login from "./routes/login/Login";
+import Order from "./routes/orders/Order";
+import Orders from "./routes/orders/Orders";
+import Product from "./routes/product/Product";
+import Register from "./routes/register/Register";
 
-import NotFound from './routes/system-pages/NotFound';
+import NotFound from "./routes/system-pages/NotFound";
 
-import './App.scss';
-import './grid.css';
+import "./App.scss";
+import "./grid.css";
 
-type Props = {
+type Props = { // tslint:disable-line
   location: Location;
 };
 

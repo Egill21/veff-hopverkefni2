@@ -1,16 +1,16 @@
 import {
-  IProduct,
-  IProducts,
-  ICategory,
-  ICategories,
-  IlogInInfo,
-  IErrorArray,
   ICart,
   ICartline,
+  ICategories,
+  ICategory,
+  IErrorArray,
+  ILogInInfo,
   IOrder,
   IOrders,
+  IProduct,
+  IProducts,
   ISingleError,
-} from './types';
+} from "./types";
 
 // Sækja slóð á API úr env
 const baseurl: string | undefined = process.env.REACT_APP_API_URL;
@@ -24,13 +24,13 @@ async function getProduct(id: number | string): Promise<IProduct | string> {
   }
 
   if (response.status === 404) {
-    return 'Not Found';
+    return "Not Found";
   }
 
-  return 'Error';
+  return "Error";
 }
 
-async function getProducts(limit?: number): Promise<Array<IProduct> | null> {
+async function getProducts(limit?: number): Promise<Array<IProduct> | null> { // tslint:disable-line
   const url = new URL(`${baseurl}products?limit=${limit ? limit : 12}`);
   const response = await fetch(url.href);
 
@@ -45,7 +45,7 @@ async function getProducts(limit?: number): Promise<Array<IProduct> | null> {
 
 async function getPagedProducts(
   categoryID: number,
-  slug?: string
+  slug?: string,
 ): Promise<IProducts | null> {
   let myURL = `${baseurl}products?limit=12&category=${categoryID}`;
 
@@ -64,8 +64,8 @@ async function getPagedProducts(
 }
 
 async function getMoreProducts(
-  categoryID: number
-): Promise<Array<IProduct> | null> {
+  categoryID: number,
+): Promise<Array<IProduct> | null> { // tslint:disable-line
   const url = new URL(`${baseurl}products?limit=6&category=${categoryID}`);
   const response = await fetch(url.href);
 
@@ -78,7 +78,7 @@ async function getMoreProducts(
   return prods.items;
 }
 
-async function getCategories(): Promise<Array<ICategory> | null> {
+async function getCategories(): Promise<Array<ICategory> | null> { // tslint:disable-line
   const url = new URL(`${baseurl}categories?limit=12`);
   const response = await fetch(url.href);
 
@@ -103,38 +103,37 @@ async function getCategory(id: number): Promise<ICategory | null> {
 
 async function login(
   userName: string,
-  password: string
-): Promise<IlogInInfo | IErrorArray | null> {
+  password: string,
+): Promise<ILogInInfo | IErrorArray | null> {
   const url = new URL(`${baseurl}users/login`);
   const response = await fetch(url.href, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+    method: "POST",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username: userName, password: password })
+    body: JSON.stringify({ username: userName, password: password }), // tslint:disable-line
   });
   const status: number = response.status;
-  console.log('TCL: status', status);
+  console.log("TCL: status", status); // tslint:disable-line
 
-  let temp: any = await response.json();
+  const temp: any = await response.json();
 
   if (status !== 200) {
-    console.log(temp);
     if (!temp.errors.length) {
-      temp.errors.field = 'Username';
+      temp.errors.field = "Username";
       return {
         errors: [temp],
-        loggedin: false
+        loggedin: false,
       };
     }
     return {
       errors: temp,
-      loggedin: false
+      loggedin: false,
     };
   }
 
-  let info: IlogInInfo = temp;
+  const info: ILogInInfo = temp;
   info.loggedin = true;
 
   return info;
@@ -143,16 +142,16 @@ async function login(
 async function post2(addUrl: string, data?: object) {
   const url = new URL(`${baseurl}${addUrl}`);
   const response = await fetch(url.href, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+    method: "POST",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   const final = {
+    response: await response.json(),
     status: response.status,
-    response: await response.json()
   };
   return final;
 }
@@ -160,35 +159,35 @@ async function post2(addUrl: string, data?: object) {
 async function register(userName: string, password: string, email: string) {
   const url = new URL(`${baseurl}users/register`);
   const response = await fetch(url.href, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+    method: "POST",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       username: userName,
-      email: email,
-      password: password
-    })
+      email: email, // tslint:disable-line
+      password: password // tslint:disable-line
+    }),
   });
 
   return await response.json();
 }
 
 async function logOut() {
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
 }
 
 async function getCart(token: string): Promise<ICart | string> {
   const url = new URL(`${baseurl}cart`);
   const response = await fetch(url.href, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
+    method: "GET",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
   });
 
   if (response.status === 200) {
@@ -196,78 +195,78 @@ async function getCart(token: string): Promise<ICart | string> {
   }
 
   if (response.status === 404) {
-    return 'Not Found';
+    return "Not Found";
   }
 
   if (response.status === 401) {
-    return 'No Access';
+    return "No Access";
   }
 
-  return 'Error';
+  return "Error";
 
 }
 
 async function addToCart(
   productID: number,
   quantity: number,
-  token: string | null
+  token: string | null,
 ): Promise<void> {
   const url = new URL(`${baseurl}cart`);
   await fetch(url.href, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+    method: "POST",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // tslint:disable-line
     },
     body: JSON.stringify({
       product: productID,
-      quantity: quantity
-    })
+      quantity: quantity, // tslint:disable-line
+    }),
   });
 }
 
-async function updateCart(lineID: number, quantity: number, token: string | null):Promise<ICartline | IErrorArray> {
+async function updateCart(lineID: number, quantity: number, token: string | null): Promise<ICartline | IErrorArray> {
   const url = new URL(`${baseurl}cart/line/${lineID}`);
   const response = await fetch(url.href, {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+    method: "PATCH",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // tslint:disable-line
     },
     body: JSON.stringify({
-      quantity: quantity
-    })
+      quantity: quantity, // tslint:disable-line
+    }),
   });
   return response.json();
 }
 
-async function deleteFromCart(lineID: number, token: string | null):Promise<void> {
+async function deleteFromCart(lineID: number, token: string | null): Promise<void> {
   const url = new URL(`${baseurl}cart/line/${lineID}`);
   await fetch(url.href, {
-    method: 'DELETE',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
+    method: "DELETE",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // tslint:disable-line
+    },
   });
 }
 
-async function createOrder(name: string, address: string, token: string | null):Promise<string | IErrorArray> {
+async function createOrder(name: string, address: string, token: string | null): Promise<string | IErrorArray> {
   const url = new URL(`${baseurl}orders`);
   const response = await fetch(url.href, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+    method: "POST",
+    headers: { // tslint:disable-line
+      Accept: "application/json", // tslint:disable-line
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // tslint:disable-line
     },
     body: JSON.stringify({
-      name: name,
-      address: address
-    })
+      name: name, // tslint:disable-line
+      address: address, // tslint:disable-line
+    }),
   });
 
   if (response.status === 400) {
@@ -275,32 +274,32 @@ async function createOrder(name: string, address: string, token: string | null):
   }
 
   if (response.status === 201) {
-    return 'Success';
-  }
-  
-  if (response.status === 401) {
-    return 'No Access';
+    return "Success";
   }
 
-  return 'Not Found';
+  if (response.status === 401) {
+    return "No Access";
+  }
+
+  return "Not Found";
 }
 
-async function getOrders(token: string | null):Promise<IOrders> {
+async function getOrders(token: string | null): Promise<IOrders> {
   const url = new URL(`${baseurl}orders`);
   const response = await fetch(url.href, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response.json();
 }
 
-async function getOrder(token: string, id: string):Promise<ICart | string> {
+async function getOrder(token: string, id: string): Promise<ICart | string> {
   const url = new URL(id, `${baseurl}orders/`);
   const response = await fetch(url.href, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 
   if (response.status === 200) {
@@ -308,21 +307,22 @@ async function getOrder(token: string, id: string):Promise<ICart | string> {
   }
 
   if (response.status === 404) {
-    return 'Not Found';
+    return "Not Found";
   }
 
   if (response.status === 401) {
-    return 'No Access';
+    return "No Access";
   }
 
-  return 'Error';
+  return "Error";
 }
 
 export {
+  getCart,
+  getMoreProducts,
   getProduct,
   getProducts,
   getPagedProducts,
-  getMoreProducts,
   getCategories,
   getCategory,
   getOrders,
@@ -335,5 +335,4 @@ export {
   register,
   logOut,
   post2,
-  getCart
 };

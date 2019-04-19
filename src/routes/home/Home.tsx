@@ -1,19 +1,19 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import Helmet from 'react-helmet';
+import React, { Fragment, useEffect, useState } from "react";
+import Helmet from "react-helmet";
 
-import { IProduct, ICategory } from '../../api/types';
+import { ICategory, IProduct } from "../../api/types";
 
-import Products from '../../components/products/Products';
-import Button from './../../components/button/Button';
-import Categories from '../../components/categories/Categories';
+import Categories from "../../components/categories/Categories";
+import Products from "../../components/products/Products";
+import Button from "./../../components/button/Button";
 
-import './Home.scss';
+import "./Home.scss";
 
-import { getProducts, getCategories } from '../../api/index';
+import { getCategories, getProducts } from "../../api/index";
 
 export default function Home() {
-  const [products, setProduct] = useState<Array<IProduct> | null>([]);
-  const [categories, setCategories] = useState<Array<ICategory> | null>([]);
+  const [products, setProduct] = useState<Array<IProduct> | null>([]); // tslint:disable-line
+  const [categories, setCategories] = useState<Array<ICategory> | null>([]); // tslint:disable-line
   const [loading, setLoading] = useState(false);
 
   async function fetchData() {
@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <Fragment>
       <Helmet title="Forsíða" />
-      {loading && 
+      {loading &&
         <h2 className="home__heading">Sæki gögn...</h2>
       }
       {!loading && (

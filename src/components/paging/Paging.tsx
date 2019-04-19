@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 
 export default function Paging() {
 
@@ -6,5 +6,5 @@ export default function Paging() {
     <div className="paging">
       paging
     </div>
-  )
+  );
 }

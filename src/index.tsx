@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import './index.scss';
-import App from './App';
+import App from "./App";
+import "./index.scss";
 
-import UserProvider from './User';
+import UserProvider from "./User";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,5 +13,5 @@ ReactDOM.render(
       <App />
     </UserProvider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root"),
 );

@@ -1,43 +1,45 @@
-import React, { Component } from 'react'
-import { login } from './api/index';
-import { IlogInInfo, IErrorArray, IContext} from './api/types';
+import React, { Component } from "react";
+import { login } from "./api/index";
+import { IContext, IErrorArray, ILogInInfo } from "./api/types";
 
 // Ef það er notandi í localStorage erum við með innskráðan notanda
 // hér gætum við líka sótt token
-const user = JSON.parse(localStorage.getItem('user') || 'null');
-const token = JSON.parse(localStorage.getItem('token') || 'null');
+const user = JSON.parse(localStorage.getItem("user") || "null");
+const token = JSON.parse(localStorage.getItem("token") || "null");
 
 export const Context = React.createContext<IContext>({
-  fetching: false,
   authenticated: !!user,
-  user: user,
-  token: token,
+  fetching: false,
+  user: user, // tslint:disable-line
+  token: token, // tslint:disable-line
   message: null,
-  logginUser: () => {},
-  loggoutUser: () => {},
+  logginUser: () => { }, // tslint:disable-line
+  loggoutUser: () => { }, // tslint:disable-line
 });
 
 export default class User extends Component {
-  state = {
-    fetching: false,
+  state = { // tslint:disable-line
     authenticated: !!user,
+    fetching: false,
     message: null,
-    user: user,
-    token: token,
-  }
+    token: token, // tslint:disable-line
+    user: user, // tslint:disable-line
+  };
 
-  logginUser:any = async (username: string, password: string) => {
+  logginUser: any = async (username: string, password: string) => { // tslint:disable-line
     this.setState({ fetching: true });
-    let loginUser : IlogInInfo | IErrorArray | null = null;
+    let loginUser: ILogInInfo | IErrorArray | null = null;
     try {
       loginUser = await login(username, password);
     } catch (e) {
-      this.setState({ message: {
-        errors: [{
-          field: 'Username',
-          error: 'No such user'
-        }]
-      }});
+      this.setState({
+        message: {
+          errors: [{
+            error: "No such user",
+            field: "Username",
+          }],
+        },
+      });
     }
 
     if (loginUser && !loginUser.loggedin) {
@@ -45,20 +47,19 @@ export default class User extends Component {
     }
 
     if (loginUser && loginUser.loggedin) {
-      const { user, token } = loginUser;
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', JSON.stringify(token));
+      const { user, token } = loginUser; // tslint:disable-line
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(token));
       this.setState({ user, token, fetching: false, authenticated: true });
     }
-  };
+  }
 
-  loggoutUser = async () => {
-    localStorage.removeItem('user');
-    console.log('removing user');
+  loggoutUser = async () => { // tslint:disable-line
+    localStorage.removeItem("user");
     this.setState({ user: null, token: null });
-  };
+  }
 
-  render() {
+  render() { // tslint:disable-line
     const { children } = this.props;
 
     return (

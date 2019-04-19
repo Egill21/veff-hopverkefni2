@@ -11,7 +11,7 @@
   &__heading {
     margin: $gutter * 1.5 0 $gutter / 2;
     font-family: $font-heading;
-    font-weight: 700;
+    font-weight: bold;
   }
 
   &__button {
@@ -21,7 +21,7 @@
   &__subheading {
     font-family: $font-heading;
     margin-top: $gutter;
-    font-weight: 700;
+    font-weight: bold;
     margin-bottom: $gutter;
   }
 }

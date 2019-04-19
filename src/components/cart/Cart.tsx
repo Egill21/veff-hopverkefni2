@@ -1,13 +1,13 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from "react";
 
-import Input from '../input/Input';
-import Button from '../button/Button';
-import Cartline from '../cartline/Cartline';
-import Error from '../../routes/system-pages/Error';
+import Error from "../../routes/system-pages/Error";
+import Button from "../button/Button";
+import Cartline from "../cartline/Cartline";
+import Input from "../input/Input";
 
-import { getCart, deleteFromCart, updateCart, createOrder } from '../../api/index';
-import { ICart } from '../../api/types';
-import './Cart.scss';
+import { createOrder, deleteFromCart, getCart, updateCart } from "../../api/index";
+import { ICart } from "../../api/types";
+import "./Cart.scss";
 
 export default function Cart(props: { token: string }) {
   const { token } = props;
@@ -19,19 +19,19 @@ export default function Cart(props: { token: string }) {
   const [isError, setError] = useState<boolean>(false);
   const [errorMSG, setErrorMSG] = useState<any>(null);
   const [orderSent, setOrderSent] = useState<boolean>(false);
-  const [name, setName] = useState<string>('');
-  const [address, setAddress] = useState<string>('');
+  const [name, setName] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
 
   async function fetchData() {
     setLoading(true);
 
     const data: any = await getCart(token);
 
-    if (data === 'Not Found') {
+    if (data === "Not Found") {
       setisNotFound(true);
-    } else if (data === 'No Access') {
+    } else if (data === "No Access") {
       setIsNoAccess(true);
-    } else if (data === 'Error') {
+    } else if (data === "Error") {
       setError(true);
     } else {
       if (data.lines.length > 0) {
@@ -40,19 +40,18 @@ export default function Cart(props: { token: string }) {
         setisNotFound(true);
       }
     }
-    
 
     setLoading(false);
   }
 
-  async function deleteLine(lineID: number, token: string) {
+  async function deleteLine(lineID: number, token: string) { // tslint:disable-line
     setLoading(true);
     await deleteFromCart(lineID, token);
     await fetchData();
     setLoading(false);
   }
 
-  async function updateLine(lineID: number, quantity: number, token: string) {
+  async function updateLine(lineID: number, quantity: number, token: string) { // tslint:disable-line
     setLoading(true);
     await updateCart(lineID, quantity, token);
     await fetchData();
@@ -63,11 +62,11 @@ export default function Cart(props: { token: string }) {
     setLoading(true);
     const response = await createOrder(name, address, token);
 
-    if (response === 'No Access') {
+    if (response === "No Access") {
       setOrderSent(true);
-    } else if (response === 'No Access') {
+    } else if (response === "No Access") {
       setIsNoAccess(true);
-    } else if (response === 'Not Found') {
+    } else if (response === "Not Found") {
       setisNotFound(true);
     } else {
       setErrorMSG(response);
@@ -78,12 +77,12 @@ export default function Cart(props: { token: string }) {
 
   function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
-    console.log("TCL: onNameChange -> e.target.value", e.target.value)
+    console.log("TCL: onNameChange -> e.target.value", e.target.value) // tslint:disable-line
   }
 
   function onAddressChange(e: React.ChangeEvent<HTMLInputElement>) {
     setAddress(e.target.value);
-    console.log("TCL: onAddressChange -> e.target.value", e.target.value)
+    console.log("TCL: onAddressChange -> e.target.value", e.target.value) // tslint:disable-line
   }
 
   useEffect(() => {
@@ -91,7 +90,7 @@ export default function Cart(props: { token: string }) {
   }, []);
 
   if (isNotFound) {
-    const message: string = 'Engin karfa fannst';
+    const message: string = "Engin karfa fannst";
     return (
       <div className="cart__col">
         <h2 className="cart__nocart" >{message}</h2>
@@ -100,12 +99,12 @@ export default function Cart(props: { token: string }) {
   }
 
   if (isNoAccess) {
-    const error: string = 'Þú verður að vera skráður inn til að skoða körfu';
+    const error: string = "Þú verður að vera skráður inn til að skoða körfu";
     return <Error type="No Access" errorMSG={error} />;
   }
 
   if (isError) {
-    const error: string = 'Eitthvað fór úrskeiðis';
+    const error: string = "Eitthvað fór úrskeiðis";
     return <Error type="Error" errorMSG={error} />;
   }
 
@@ -129,15 +128,21 @@ export default function Cart(props: { token: string }) {
                     <Fragment>
                       {cart.lines.map((cartline: any, i: any) => {
                         return (
-                          <Cartline key={i} line={cartline} token={token} deleteLine={deleteLine} updateLine={updateLine} />
+                          <Cartline
+                            key={i}
+                            line={cartline}
+                            token={token}
+                            deleteLine={deleteLine}
+                            updateLine={updateLine} />
                         );
                       })}
                       <div className="cart__col">
+                        <p className="cart__totalprice">Karfa samtals: {cart.total} kr.-</p>
                         <div className="cart__input">
                           <h2 className="cart__title">Senda inn pöntun</h2>
                           {errorMSG &&
                             errorMSG.errors.map((error: any, i: any) => {
-                              return ( <p key={i} >{`${error.field}, ${error.error}`}</p> );
+                              return (<p key={i} >{`${error.field}, ${error.error}`}</p>);
                             })
                           }
                           <Input onChange={onNameChange} text="Nafn:" type="text" name="name" />

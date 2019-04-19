@@ -1,13 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from "react";
 
-import { IProduct } from '../../api/types';
-import { getProduct, getMoreProducts } from '../../api/index';
+import { getMoreProducts, getProduct } from "../../api/index";
+import { IProduct } from "../../api/types";
 
-import './Product.scss';
+import "./Product.scss";
 
-import SingleProduct from '../../components/product/Product';
-import Products from '../../components/products/Products';
-import Error from '../../routes/system-pages/Error';
+import SingleProduct from "../../components/product/Product";
+import Products from "../../components/products/Products";
+import Error from "../../routes/system-pages/Error";
 
 export default function Product(props: any) {
 
@@ -15,7 +15,7 @@ export default function Product(props: any) {
   const { id } = match.params;
 
   const [product, setProduct] = useState<IProduct | null>(null);
-  const [products, setProducts] = useState<Array<IProduct> | null>([]);
+  const [products, setProducts] = useState<Array<IProduct> | null>([]); // tslint:disable-line
   const [isNotFound, setisNotFound] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,9 +24,9 @@ export default function Product(props: any) {
     setLoading(true);
     const data: any = await getProduct(id);
 
-    if (data === 'Not Found') {
+    if (data === "Not Found") {
       setisNotFound(true);
-    } else if (data === 'Error') {
+    } else if (data === "Error") {
       setError(true);
     } else {
       const myProducts: IProduct[] | null = await getMoreProducts(data.category_id);
@@ -41,12 +41,12 @@ export default function Product(props: any) {
   }, []);
 
   if (isNotFound) {
-    const error: string = 'Vara fannst ekki';
+    const error: string = "Vara fannst ekki";
     return <Error type="Not Found" errorMSG={error} />;
   }
 
   if (isError) {
-    const error: string = 'Eitthvað fór úrskeiðis';
+    const error: string = "Eitthvað fór úrskeiðis";
     return <Error type="Error" errorMSG={error} />;
   }
 

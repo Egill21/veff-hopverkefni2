@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './User.scss';
+import "./User.scss";
 
 export default function User() {
   return (

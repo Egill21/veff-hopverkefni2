@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { Context } from '../../User';
+import { Context } from "../../User";
 
-import Userorder from '../../components/userorder/Userorder';
-import NoAccess from '../system-pages/NoAccess';
+import Userorder from "../../components/userorder/Userorder";
+import NoAccess from "../system-pages/NoAccess";
 
 export default function Order(props: any) {
 
@@ -14,9 +14,9 @@ export default function Order(props: any) {
     <Context.Consumer>
       {({ token }) => {
         if (!token) {
-          return ( <NoAccess /> )
+          return (<NoAccess />);
         } else {
-          return ( <Userorder token={token} id={id} /> )
+          return (<Userorder token={token} id={id} />);
         }
       }}
     </Context.Consumer>

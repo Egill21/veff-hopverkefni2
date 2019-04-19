@@ -1,21 +1,20 @@
-import React, { Fragment, Children, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Children, Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 
-import Input from './../../components/input/Input';
-import Button from './../../components/button/Button';
-import { post2 } from '../../api/index';
+import { post2 } from "../../api/index";
+import { IFieldError } from "../../api/types";
+import Button from "./../../components/button/Button";
+import Input from "./../../components/input/Input";
 
-import './Register.scss';
-import { IFieldError } from '../../api/types';
+import "./Register.scss";
 
 export default function Register() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState<Array<IFieldError>>([]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState<Array<IFieldError>>([]); // tslint:disable-line
 
   let status = 200;
-  let errorMessages;
 
   function changeUsername(e: React.ChangeEvent<HTMLInputElement>) {
     setUsername(e.target.value);
@@ -28,23 +27,24 @@ export default function Register() {
   function changeEmail(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
   }
+
   async function makeUser() {
     const data = {
-      username: username,
-      password: password,
-      email: email
+      username: username, // tslint:disable-line
+      password: password, // tslint:disable-line
+      email: email, // tslint:disable-line
     };
-    const response = await post2('users/register', data);
-    console.log('TCL: makeUser -> response', response);
+    const response = await post2("users/register", data);
+    console.log("TCL: makeUser -> response", response); // tslint:disable-line
 
     status = response.status;
-    console.log('TCL: makeUser -> status', status);
+    console.log("TCL: makeUser -> status", status); // tslint:disable-line
     if (status !== 200) {
       const final: IFieldError[] = response.response.errors;
-      console.log(final);
       setErrors(final);
     }
   }
+
   return (
     <React.Fragment>
       <div className="register__col">

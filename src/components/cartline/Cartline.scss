@@ -60,7 +60,7 @@
 
   &__title {
     font-family: $font-heading;
-    font-weight: 700;
+    font-weight: bold;
   }
 
   &__quantity {
@@ -85,10 +85,11 @@
   &__update {
     width: auto;
     padding: 4px 10px;
+    font-size: 0.9rem;
   }
 
   &__amount {
-    font-weight: 700;
+    font-weight: bold;
 
     @media (max-width: 800px) {
         margin-bottom: $gutter;
@@ -96,7 +97,8 @@
   }
 
   &__delete {
-    width: 100px;
-    padding: 5px 10px;
+    width: 80px;
+    padding: 5px;
+    font-size: 0.9rem;
   }
 }
