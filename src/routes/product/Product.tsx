@@ -21,9 +21,15 @@ export default function Product(props: any) {
   const [isError, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  async function fetchData() {
+  async function fetchData(productID?: number) {
     setLoading(true);
-    const data: any = await getProduct(id);
+    console.log('fetching');
+    let data:any;
+    if (productID) {
+      data = await getProduct(productID);
+    } else {
+      data = await getProduct(id);
+    }
 
     if (data === "Not Found") {
       setisNotFound(true);
@@ -72,7 +78,7 @@ export default function Product(props: any) {
             </Fragment>
           }
           <div className="product__row">
-            {products && <Products productList={products} />}
+            {products && <Products productList={products} onClick={fetchData} />}
           </div>
         </Fragment>
       }
