@@ -40,14 +40,20 @@ async function getProducts(limit?: number): Promise<Array<IProduct> | null> { //
   return prods.items;
 }
 
-async function getPagedProducts(
+async function getPagedProducts(info: {
   categoryID: number,
   slug?: string,
-): Promise<IProducts | null> {
+  searchslug?: string,
+}): Promise<IProducts | null> {
+  const { categoryID, slug, searchslug } = info;
   let myURL = `${baseurl}products?limit=12&category=${categoryID}`;
 
   if (slug) {
     myURL = `${slug}&category=${categoryID}`;
+  }
+
+  if (searchslug) {
+    myURL = `${baseurl}products?category=${categoryID}&search=${searchslug}`;
   }
 
   const url = new URL(myURL);

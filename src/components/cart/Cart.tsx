@@ -62,7 +62,7 @@ export default function Cart(props: { token: string }) {
     setLoading(true);
     const response = await createOrder(name, address, token);
 
-    if (response === "No Access") {
+    if (response === "Success") {
       setOrderSent(true);
     } else if (response === "No Access") {
       setIsNoAccess(true);
@@ -119,7 +119,7 @@ export default function Cart(props: { token: string }) {
         <Fragment>
           {orderSent &&
             <div className="cart__col">
-              <p>Pöntun hefur verið send!</p>
+              <h2 className="cart__nocart">Pöntun hefur verið send!</h2>
             </div>
           }
           {!orderSent &&
