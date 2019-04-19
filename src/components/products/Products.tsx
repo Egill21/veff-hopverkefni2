@@ -6,9 +6,11 @@ import "./Products.scss";
 
 export default function Products(props: { productList: IProduct[] }) {
   const { productList } = props;
+
   return (
     <Fragment>
       {productList.map((product, i) => {
+
         return (
           <div key={i} className="products__col">
             <div className="products__product">

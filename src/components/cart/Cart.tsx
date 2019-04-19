@@ -118,7 +118,9 @@ export default function Cart(props: { token: string }) {
       {!loading &&
         <Fragment>
           {orderSent &&
-            <p>Pöntun hefur verið send!</p>
+            <div className="cart__col">
+              <p>Pöntun hefur verið send!</p>
+            </div>
           }
           {!orderSent &&
             <Fragment>
@@ -142,11 +144,21 @@ export default function Cart(props: { token: string }) {
                           <h2 className="cart__title">Senda inn pöntun</h2>
                           {errorMSG &&
                             errorMSG.errors.map((error: any, i: any) => {
-                              return (<p key={i} >{`${error.field}, ${error.error}`}</p>);
+                              return (<p key={i} className="cart__errors">{`${error.field}, ${error.error}`}</p>);
                             })
                           }
-                          <Input onChange={onNameChange} text="Nafn:" type="text" name="name" />
-                          <Input onChange={onAddressChange} text="Heimilisfang:" type="text" name="address" />
+                          <Input
+                            onChange={onNameChange}
+                            text="Nafn:"
+                            type="text"
+                            name="name"
+                          />
+                          <Input
+                            onChange={onAddressChange}
+                            text="Heimilisfang:"
+                            type="text"
+                            name="address"
+                          />
                           <Button onClick={order} className="cart__button">Senda inn pöntun</Button>
                         </div>
                       </div>

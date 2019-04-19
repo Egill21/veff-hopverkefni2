@@ -13,6 +13,16 @@
     @include offset-left(2);
     margin-bottom: $gutter;
     font-family: $font-heading;
+
+    @media (max-width: 1000px) {
+      @include columns(10);
+      @include offset-left(1);
+    }
+
+    @media (max-width: 800px) {
+      @include columns(12);
+      @include offset-left(0);
+    }
   }
 
 
