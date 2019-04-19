@@ -104,7 +104,7 @@ async function getCategory(id: number): Promise<ICategory | null> {
 async function login(
   userName: string,
   password: string
-): Promise<IlogInInfo | IErrorArray | null> {
+): Promise<any> {
   const url = new URL(`${baseurl}users/login`);
   const response = await fetch(url.href, {
     method: 'POST',
@@ -114,7 +114,10 @@ async function login(
     },
     body: JSON.stringify({ username: userName, password: password })
   });
-  const status: number = response.status;
+
+  return response.json();
+
+/*   const status: number = response.status;
   console.log('TCL: status', status);
 
   let temp: any = await response.json();
@@ -137,7 +140,7 @@ async function login(
   let info: IlogInInfo = temp;
   info.loggedin = true;
 
-  return info;
+  return info; */
 }
 
 async function post2(addUrl: string, data?: object) {
