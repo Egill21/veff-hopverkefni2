@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import Helmet from "react-helmet";
 
 import { getMoreProducts, getProduct } from "../../api/index";
 import { IProduct } from "../../api/types";
@@ -63,6 +64,7 @@ export default function Product(props: any) {
         <Fragment>
           {product &&
             <Fragment>
+              <Helmet title={product.title} />
               <div className="product__row">
                 <SingleProduct product={product} />
               </div>

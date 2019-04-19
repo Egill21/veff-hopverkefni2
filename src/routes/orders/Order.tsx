@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Helmet from "react-helmet";
 
 import { Context } from "../../User";
 
@@ -16,7 +17,12 @@ export default function Order(props: any) {
         if (!token) {
           return (<NoAccess />);
         } else {
-          return (<Userorder token={token} id={id} />);
+          return (
+            <Fragment>
+              <Helmet title={`Pöntun ${id}`} />
+              <Userorder token={token} id={id} />
+            </Fragment>
+          );
         }
       }}
     </Context.Consumer>

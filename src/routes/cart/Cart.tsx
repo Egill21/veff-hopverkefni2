@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Helmet from "react-helmet";
 
 import AddToCart from "../../components/cart/Cart";
 import Error from "../system-pages/Error";
@@ -16,9 +17,12 @@ export default function Cart() {
           return (<Error type="No Access" errorMSG={error} />);
         } else {
           return (
-            <div className="cart__row">
-              <AddToCart token={token} />
-            </div>
+            <Fragment>
+              <Helmet title="Karfa" />
+              <div className="cart__row">
+                <AddToCart token={token} />
+              </div>
+            </Fragment>
           );
         }
       }}
