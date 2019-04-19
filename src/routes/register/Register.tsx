@@ -6,6 +6,7 @@ import { post2 } from '../../api/index';
 import { IFieldError } from '../../api/types';
 import Button from './../../components/button/Button';
 import Input from './../../components/input/Input';
+import Login from '../login/Login';
 
 import './Register.scss';
 
@@ -14,6 +15,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<Array<IFieldError>>([]); // tslint:disable-line
+  const [accepted, setAccepted] = useState(false);
 
   let status = 200;
   let userError = false;
@@ -47,6 +49,10 @@ export default function Register() {
       const final: IFieldError[] = response.response.errors;
       setErrors(final);
     }
+    setAccepted(true);
+  }
+  if (accepted) {
+    return <Login />;
   }
 
   return (
