@@ -1,32 +1,32 @@
-import React, { Component } from 'react'
-import { login } from './api/index';
-import { IContext } from './api/types';
+import React, { Component } from "react";
+import { login } from "./api/index";
+import { IContext } from "./api/types";
 
-const user = JSON.parse(localStorage.getItem('user') || 'null');
-const token = JSON.parse(localStorage.getItem('token') || 'null');
+const user = JSON.parse(localStorage.getItem("user") || "null");
+const token = JSON.parse(localStorage.getItem("token") || "null");
 
 export const Context = React.createContext<IContext>({
-  fetching: false,
   authenticated: !!user,
-  user: user,
-  token: token,
+  fetching: false,
+  user: user, // tslint:disable-line
+  token: token, // tslint:disable-line
   message: null,
   message2: null,
-  logginUser: () => {},
-  loggoutUser: () => {},
+  logginUser: () => { }, // tslint:disable-line
+  loggoutUser: () => { }, // tslint:disable-line
 });
 
 export default class User extends Component {
-  state = {
-    fetching: false,
+  state = { // tslint:disable-line
     authenticated: !!user,
+    fetching: false,
     message: null,
     message2: null,
-    user: user,
-    token: token,
-  }
+    user: user, // tslint:disable-line
+    token: token, // tslint:disable-line
+  };
 
-  logginUser:any = async (username: string, password: string) => {
+  logginUser: any = async (username: string, password: string) => { // tslint:disable-line
     this.setState({ fetching: true });
 
     const loginUser = await login(username, password);
@@ -40,20 +40,20 @@ export default class User extends Component {
     }
 
     if (loginUser && loginUser.user) {
-      const { user, token } = loginUser;
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', JSON.stringify(token));
+      const { user, token } = loginUser; // tslint:disable-line
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(token));
       this.setState({ user, token, fetching: false, authenticated: true, message: null, message2: null });
     }
-  };
+  }
 
-  loggoutUser = async () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+  loggoutUser = async () => { // tslint:disable-line
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     this.setState({ user: null, token: null });
-  };
+  }
 
-  render() {
+  render() { // tslint:disable-line
     const { children } = this.props;
 
     return (

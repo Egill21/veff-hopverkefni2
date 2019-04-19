@@ -20,6 +20,7 @@
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "tslint": "^5.16.0",
     "typescript": "3.3.4000",
     "use-async-effect": "^2.0.1"
   },
@@ -27,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tslint": "tslint *.tsx"
   },
   "eslintConfig": {
     "extends": "react-app"

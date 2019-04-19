@@ -1,23 +1,23 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import Helmet from 'react-helmet';
+import React, { Fragment, useEffect, useState } from "react";
+import Helmet from "react-helmet";
 
-import { IProducts, ICategory } from '../../api/types';
-import { getPagedProducts, getCategory } from '../../api/index';
+import { getCategory, getPagedProducts } from "../../api/index";
+import { ICategory, IProducts } from "../../api/types";
 
-import Products from '../../components/products/Products';
+import Products from "../../components/products/Products";
 
-import './Category.scss';
+import "./Category.scss";
 
 export default function Category(props: any) {
   const { match } = props;
   const { id } = match.params;
-  const categoryID = parseInt(id);
+  const categoryID = parseInt(id); // tslint:disable-line
 
   const [products, setProducts] = useState<IProducts | null>(null);
   const [category, setCategory] = useState<ICategory | null>(null);
   const [page, setPage] = useState<number>(1);
-  const [inputBox, setInputBox] = useState<string>('');
-  const [searchInput, setSearchInput] = useState<string>('');
+  const [inputBox, setInputBox] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
   async function fetchData() {
@@ -33,7 +33,7 @@ export default function Category(props: any) {
     setLoading(true);
     const newProducts: IProducts | null = await getPagedProducts(
       categoryID,
-      slug
+      slug,
     );
     setPage(page + pageChange);
     setProducts(newProducts);
@@ -45,7 +45,7 @@ export default function Category(props: any) {
     setSearchInput(inputBox);
     const newProducts: IProducts | null = await getPagedProducts(
       categoryID,
-      `${slug}&search=${inputBox}`
+      `${slug}&search=${inputBox}`,
     );
     setProducts(newProducts);
     setLoading(false);
@@ -92,7 +92,7 @@ export default function Category(props: any) {
                 onClick={() =>
                   fetchNewData(
                     `${products._links.prev.href}&search=${searchInput}`,
-                    -1
+                    -1,
                   )
                 }
                 className="category__pageButton"
@@ -106,7 +106,7 @@ export default function Category(props: any) {
                 onClick={() =>
                   fetchNewData(
                     `${products._links.next.href}&search=${searchInput}`,
-                    1
+                    1,
                   )
                 }
                 className="category__pageButton"

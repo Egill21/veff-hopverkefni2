@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { Context } from '../../User';
-import Userorders from '../../components/userorders/Userorders';
-import NoAccess from '../system-pages/NoAccess';
+import Userorders from "../../components/userorders/Userorders";
+import { Context } from "../../User";
+import NoAccess from "../system-pages/NoAccess";
 
 export default function Orders() {
 
@@ -12,13 +12,13 @@ export default function Orders() {
         if (!token) {
           return (
             <NoAccess />
-          )
+          );
         } else {
           return (
             <Userorders token={token} />
-          )
+          );
         }
       }}
     </Context.Consumer>
-  )
+  );
 }

@@ -4,10 +4,11 @@
 
   &__col {
     @include columns(12);
-    margin: $gutter * 2 0 $gutter;
+      margin: $gutter * 2 0 $gutter / 2;
 
     @media (min-width: 700px) {
       @include columns(6);
+      margin: $gutter * 2 0 $gutter;
     }
   }
 
@@ -24,12 +25,22 @@
     margin-bottom: $gutter / 2;
   }
 
-  &__loggedinLabel {
-    margin-right: $gutter/2;
+  &__input {
+    width: $gutter * 1.5;
+    height: $gutter;
+    padding: 5px;
+    font-size: 0.8rem;
+    border: 1px solid #eee;
+    margin: 0 $gutter / 2;
   }
 
-  &__loggedinInput {
-    margin-right: $gutter/2;
-    max-width: $gutter;
+  &__button {
+    width: auto;
+    padding: 4px 10px;
+    font-size: 0.9rem;
+  }
+
+  &__added {
+    margin-top: $gutter / 2;
   }
 }

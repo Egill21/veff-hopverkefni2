@@ -73,7 +73,7 @@ export interface IOrders {
   _links: Links;
 }
 
-export interface IlogInInfo {
+export interface ILogInInfo {
   user: IUser | null;
   token: string;
   expiresIn: number;
@@ -103,19 +103,19 @@ export interface ISingleError {
   error: string;
 }
 
-export interface Links {
+export interface Links { // tslint:disable-line
   self: Self;
   prev: Prev;
   next: Next;
 }
 
-export interface Self {
+export interface Self { // tslint:disable-line
   href: string;
 }
-export interface Prev {
+export interface Prev { // tslint:disable-line
   href: string;
 }
-export interface Next {
+export interface Next { // tslint:disable-line
   href: string;
 }
 
@@ -129,5 +129,3 @@ export interface IContext {
   logginUser: any;
   loggoutUser: any;
 }
-
-// todo fleiri týpur

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './Button.scss';
+import "./Button.scss";
 
 interface IButtonProps {
   children: any;
@@ -13,21 +13,21 @@ interface IButtonProps {
 export default function Button(props: IButtonProps) {
   const {
     children,
-    onClick = () => {},
+    onClick = () => { }, // tslint:disable-line
     disabled = false,
-    className = '',
-    small = false
+    className = "",
+    small = false,
   } = props;
 
   // væri líka hægt að nota `classnames` pakka
   const classes = [
-    'button',
+    "button",
     className ? className : null,
-    disabled ? 'button--disabled' : null,
-    small ? 'button--small' : null
+    disabled ? "button--disabled" : null,
+    small ? "button--small" : null,
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(" ");
 
   return (
     <button onClick={onClick} disabled={disabled} className={classes}>

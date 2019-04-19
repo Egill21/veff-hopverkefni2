@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link, NavLink } from "react-router-dom";
 
-import './Header.scss';
+import "./Header.scss";
 
-import { Context } from '../../User';
+import { Context } from "../../User";
 
 export default function Header() {
   function loggingOut(loggoutUser: any) {
@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <Context.Consumer>
-      {({ loggoutUser, user }) => {
+      {({ loggoutUser, user }) => { // tslint:disable-line
         return (
           <header className="header">
             <div className="header__content">

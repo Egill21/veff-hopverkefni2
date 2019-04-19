@@ -1,10 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from "react";
 
-import Input from '../input/Input';
-import Button from '../button/Button';
-import { getCart, deleteFromCart } from '../../api/index';
-import { ICart, ICartline } from '../../api/types';
-import './Cartline.scss';
+import { ICartline } from "../../api/types";
+import Button from "../button/Button";
+import "./Cartline.scss";
 
 export default function Cartline(props: { line: ICartline, token: string | null, deleteLine: any, updateLine: any }) {
 
@@ -13,9 +11,9 @@ export default function Cartline(props: { line: ICartline, token: string | null,
   const [quantity, setQuantity] = useState<number | string>(line.quantity);
 
   function updateQuantity(e: React.ChangeEvent<HTMLInputElement>) {
-    const input = parseInt(e.target.value);
-    const value = isNaN(input) ? '' : input;
-    if (typeof value === 'number' && value < 1) {
+    const input = parseInt(e.target.value); // tslint:disable-line
+    const value = isNaN(input) ? "" : input;
+    if (typeof value === "number" && value < 1) {
       setQuantity(1);
     } else {
       setQuantity(value);
@@ -34,14 +32,17 @@ export default function Cartline(props: { line: ICartline, token: string | null,
         </div>
         <div className="cartline__info--right">
           <div className="cartline__quantity">
-            <p>Fjöldi:</p>
+            <label>Fjöldi:</label>
             <input
               type="number"
               className="cartline__quantity--input"
               value={quantity}
               onChange={updateQuantity}
             />
-            <Button onClick={() => updateLine(line.id, quantity, token)} className="cartline__update" children="Uppfæra" />
+            <Button onClick={() => updateLine(line.id, quantity, token)}
+              className="cartline__update"
+              children="Uppfæra"
+            />
           </div>
           <p className="cartline__amount">{`Samtals: ${
             line.total

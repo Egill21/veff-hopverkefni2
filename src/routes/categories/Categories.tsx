@@ -1,16 +1,14 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from "react";
 
-import { ICategory } from '../../api/types';
-
-import Categories from '../../components/categories/Categories';
-
-import { getCategories } from '../../api/index';
+import { getCategories } from "../../api/index";
+import { ICategory } from "../../api/types";
+import Categories from "../../components/categories/Categories";
 
 import '../../components/categories/Categories.scss';
 
 export default function CategoriesRoute() {
 
-  const [categories, setCategories] = useState<Array<ICategory> | null>([]);
+  const [categories, setCategories] = useState<Array<ICategory> | null>([]); // tslint:disable-line
   const [loading, setLoading] = useState(false);
 
   async function fetchData() {

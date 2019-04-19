@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
-import { IProduct } from '../../api/types';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { IProduct } from "../../api/types";
 
-import './Products.scss';
+import "./Products.scss";
 
 export default function Products(props: { productList: IProduct[] }) {
   const { productList } = props;

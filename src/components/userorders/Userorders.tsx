@@ -1,10 +1,10 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import './Userorders.scss';
+import "./Userorders.scss";
 
-import { getOrders } from '../../api/index';
-import { IOrders } from '../../api/types';
+import { getOrders } from "../../api/index";
+import { IOrders } from "../../api/types";
 
 export default function Userorders(props: { token: string }) {
 
@@ -16,7 +16,6 @@ export default function Userorders(props: { token: string }) {
   async function fetchData() {
     setLoading(true);
     const data = await getOrders(token);
-    console.log(data);
     setOrders(data);
     setLoading(false);
   }
@@ -60,5 +59,5 @@ export default function Userorders(props: { token: string }) {
         </Fragment>
       }
     </div>
-  )
+  );
 }
