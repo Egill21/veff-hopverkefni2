@@ -41,10 +41,8 @@ export default function Register() {
       email: email // tslint:disable-line
     };
     const response = await post2('users/register', data);
-    console.log('TCL: makeUser -> response', response); // tslint:disable-line
 
     status = response.status;
-    console.log('TCL: makeUser -> status', status); // tslint:disable-line
     if (status !== 200) {
       const final: IFieldError[] = response.response.errors;
       setErrors(final);

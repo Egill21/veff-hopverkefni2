@@ -38,6 +38,15 @@ export default function Login() {
           userError = false;
           passError = false;
         }
+        if (message2) {
+          if (message2.error.includes('password')) {
+            passError = true;
+            userError = false;
+          } else {
+            passError = false;
+            userError = true;
+          }
+        }
         return (
           <Fragment>
             <Helmet title="Innskráning" />

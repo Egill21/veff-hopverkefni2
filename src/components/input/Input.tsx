@@ -13,8 +13,6 @@ interface props {
 }
 
 export default function Input(props: props) {
-  console.log(props.error !== true);
-  // tslint:disable-line
   return (
     <React.Fragment>
       <div className="input__container">
