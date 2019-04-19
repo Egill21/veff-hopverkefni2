@@ -32,7 +32,6 @@ export default function Cart(props: { token: string }) {
 
   async function fetchData() {
     setLoading(true);
-
     const data: any = await getCart(token);
 
     if (data === 'Not Found') {

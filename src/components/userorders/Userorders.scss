@@ -25,6 +25,9 @@
     }
   }
 
+  &__title {
+    margin-bottom: $gutter;
+  }
 
   &__table {
     font-family: $font-main;
@@ -48,7 +51,10 @@
     }
 
     tr:nth-child(odd){background-color: $color-gray;}
+  }
 
+  &__notfound {
+    margin-top: $gutter;
   }
 
 }

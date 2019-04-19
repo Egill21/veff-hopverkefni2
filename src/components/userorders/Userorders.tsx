@@ -10,13 +10,20 @@ export default function Userorders(props: { token: string }) {
 
   const { token } = props;
 
+  const [isNotFound, setisNotFound] = useState<boolean>(false);
   const [orders, setOrders] = useState<IOrders | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   async function fetchData() {
     setLoading(true);
     const data = await getOrders(token);
-    setOrders(data);
+
+    if (data.items.length > 0) {
+      setOrders(data);
+    } else {
+      setisNotFound(true);
+    }
+
     setLoading(false);
   }
 
@@ -24,16 +31,27 @@ export default function Userorders(props: { token: string }) {
     fetchData();
   }, []);
 
+  if (isNotFound) {
+    const message: string = "Engin pöntun fannst";
+    return (
+      <div className="userorders__col">
+        <h2 className="userorders__notfound">{message}</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="userorders__row">
-      <h1 className="userorders__col">Þínar pantanir</h1>
       {loading &&
-        <p>Hleð gögnum...</p>
+        <div className="userorders__col">
+          <h2>Hleð gögnum...</h2>
+        </div>
       }
       {!loading &&
         <Fragment>
           {orders &&
             <div className="userorders__col">
+              <h1 className="userorders__title">Þínar pantanir</h1>
               <table className="userorders__table">
                 <tbody>
                   <tr>
