@@ -71,7 +71,7 @@ export default function Userorder(props: { token: string, id: string }) {
                     <label>Heimilisfang</label>
                     <label>Búin til</label>
                   </div>
-                  <div>
+                  <div className="userorder__userinfo--data">
                     <p>{order.name}</p>
                     <p>{order.address}</p>
                     <p>{order.created}</p>

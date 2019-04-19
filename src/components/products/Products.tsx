@@ -10,6 +10,7 @@ export default function Products(props: { productList: IProduct[], onClick?: any
   return (
     <Fragment>
       {productList.map((product, i) => {
+
         return (
           <div key={i} className="products__col">
             <div className="products__product">

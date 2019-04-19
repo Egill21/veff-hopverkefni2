@@ -30,4 +30,8 @@
     color: $color-font;
     text-decoration: none;
   }
+
+  &__errors {
+    color: $color-invalid;
+  }
 }
