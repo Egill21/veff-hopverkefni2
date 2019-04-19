@@ -11,6 +11,7 @@ import "./Category.scss";
 export default function Category(props: any) {
   const { match } = props;
   const { id } = match.params;
+
   const categoryID = parseInt(id); // tslint:disable-line
 
   const [products, setProducts] = useState<IProducts | null>(null);
@@ -22,7 +23,7 @@ export default function Category(props: any) {
 
   async function fetchData() {
     setLoading(true);
-    const myProducts: IProducts | null = await getPagedProducts(categoryID);
+    const myProducts: IProducts | null = await getPagedProducts({categoryID});
     const myCategory: ICategory | null = await getCategory(categoryID);
     setProducts(myProducts);
     setCategory(myCategory);
@@ -31,23 +32,24 @@ export default function Category(props: any) {
 
   async function fetchNewData(slug: string, pageChange: number) {
     setLoading(true);
-    const newProducts: IProducts | null = await getPagedProducts(
+    const newProducts: IProducts | null = await getPagedProducts({
       categoryID,
       slug,
-    );
+    });
     setPage(page + pageChange);
     setProducts(newProducts);
     setLoading(false);
   }
 
-  async function searchData(slug: string) {
+  async function searchData() {
     setLoading(true);
     setSearchInput(inputBox);
-    const newProducts: IProducts | null = await getPagedProducts(
+    const newProducts: IProducts | null = await getPagedProducts({
       categoryID,
-      `${slug}&search=${inputBox}`,
-    );
+      searchslug : inputBox,
+    });
     setProducts(newProducts);
+    setPage(1);
     setLoading(false);
   }
 
@@ -61,62 +63,69 @@ export default function Category(props: any) {
 
   return (
     <div className="category">
-      {products && (
+      {!loading &&
         <Fragment>
-          {category && (
+          {products && (
             <Fragment>
-              <Helmet title={category.title} />
-              <h2 className="category__heading">{category.title}</h2>
+              {category && (
+                <Fragment>
+                  <Helmet title={category.title} />
+                  <h2 className="category__heading">{category.title}</h2>
+                </Fragment>
+              )}
+              <div className="category__searchContainer">
+                <label className="category__searchlabel">Leita:</label>
+                <input
+                  onChange={onChange}
+                  className="category__searchInput"
+                  type="text"
+                />
+                <button
+                  onClick={searchData}
+                  className="category__searchButton"
+                >
+                  Leita
+                </button>
+              </div>
+              <div className="category__row">
+                <Products productList={products.items} />
+              </div>
+              <div className="category__pages">
+                {products._links.prev && (
+                  <button
+                    onClick={() =>
+                      fetchNewData(
+                        `${products._links.prev.href}&search=${searchInput}`,
+                        -1,
+                      )
+                    }
+                    className="category__pageButton"
+                  >
+                    Fyrri síða
+                  </button>
+                )}
+                <p className="category__currentPage">Síða {page}</p>
+                {products._links.next && (
+                  <button
+                    onClick={() =>
+                      fetchNewData(
+                        `${products._links.next.href}&search=${searchInput}`,
+                        1,
+                      )
+                    }
+                    className="category__pageButton"
+                  >
+                    Næsta síða
+                  </button>
+                )}
+              </div>
             </Fragment>
           )}
-          <div className="category__searchContainer">
-            <label className="category__searchlabel">Leita:</label>
-            <input
-              onChange={onChange}
-              className="category__searchInput"
-              type="text"
-            />
-            <button
-              onClick={() => searchData(products._links.self.href)}
-              className="category__searchButton"
-            >
-              Leita
-            </button>
-          </div>
-          <div className="category__row">
-            <Products productList={products.items} />
-          </div>
-          <div className="category__pages">
-            {products._links.prev && (
-              <button
-                onClick={() =>
-                  fetchNewData(
-                    `${products._links.prev.href}&search=${searchInput}`,
-                    -1,
-                  )
-                }
-                className="category__pageButton"
-              >
-                Fyrri síða
-              </button>
-            )}
-            <p className="category__currentPage">Síða {page}</p>
-            {products._links.next && (
-              <button
-                onClick={() =>
-                  fetchNewData(
-                    `${products._links.next.href}&search=${searchInput}`,
-                    1,
-                  )
-                }
-                className="category__pageButton"
-              >
-                Næsta síða
-              </button>
-            )}
-          </div>
         </Fragment>
-      )}
+      }
+      {loading &&
+        <h2 className="category__heading">Sæki vörur...</h2>
+      }
     </div>
   );
 }
