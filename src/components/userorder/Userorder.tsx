@@ -93,7 +93,7 @@ export default function Userorder(props: { token: string, id: string }) {
                           <td>{line.quantity}</td>
                           <td>{line.total}</td>
                         </tr>
-                      )
+                      );
                     })}
                     <tr>
                       <td></td>
@@ -110,7 +110,9 @@ export default function Userorder(props: { token: string, id: string }) {
         </Fragment>
       }
       {loading &&
-        <p>Hleð gögnum...</p>
+        <div className="userorder__col">
+          <h2 className="userorder__loading">Hleð gögnum...</h2>
+        </div>
       }
     </Fragment>
   );
