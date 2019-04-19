@@ -64,7 +64,7 @@ export default function SingleProduct(props: { product: IProduct }) {
                     <label>Fjöldi</label>
                     <input onChange={updateQuantity} value={input} className="product__input" type="number" ></input>
                     <Button onClick={() => addItem(input, token)} className="product__button">Bæta við körfu</Button>
-                    {added && <p className="product__added">Bætt við körfu!</p>}
+                    {added && <label className="product__added">Bætt við körfu!</label>}
                   </Fragment>
                 }
               </div>

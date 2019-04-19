@@ -18,6 +18,11 @@
     flex-direction: column;
   }
 
+  &__input input {
+    height: 30px;
+    margin: 2px 0;
+  }
+
   &__button {
     margin: $gutter / 2 0 0;
   }
@@ -25,5 +30,9 @@
   &__register {
     color: $color-font;
     text-decoration: none;
+  }
+
+  &__errors {
+    color: $color-invalid;
   }
 }

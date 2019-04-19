@@ -72,7 +72,7 @@ export default function Cart(props: { token: string }) {
     setLoading(true);
     const response = await createOrder(name, address, token);
 
-    if (response === 'No Access') {
+    if (response === 'Success') {
       setOrderSent(true);
     } else if (response === 'No Access') {
       setIsNoAccess(true);
@@ -127,7 +127,11 @@ export default function Cart(props: { token: string }) {
       )}
       {!loading && (
         <Fragment>
-          {orderSent && <p>Pöntun hefur verið send!</p>}
+          {orderSent && (
+            <div className="cart__col">
+              <h2 className="cart__nocart">Pöntun hefur verið send!</h2>
+            </div>
+          )}
           {!orderSent && (
             <Fragment>
               {cart && (
@@ -159,9 +163,9 @@ export default function Cart(props: { token: string }) {
                                 addressError = true;
                               }
                               return (
-                                <p key={i}>{`${error.field}, ${
-                                  error.error
-                                }`}</p>
+                                <p key={i} className="cart__errors">{`${
+                                  error.field
+                                }, ${error.error}`}</p>
                               );
                             })}
                           <Input
@@ -169,6 +173,7 @@ export default function Cart(props: { token: string }) {
                             text="Nafn:"
                             type="text"
                             name="name"
+                            value={name}
                             error={nameError && errorMSG.errors.length !== 0}
                           />
                           <Input
@@ -176,6 +181,7 @@ export default function Cart(props: { token: string }) {
                             text="Heimilisfang:"
                             type="text"
                             name="address"
+                            value={address}
                             error={addressError && errorMSG.errors.length !== 0}
                           />
                           <Button onClick={order} className="cart__button">

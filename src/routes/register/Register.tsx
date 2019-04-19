@@ -62,7 +62,7 @@ export default function Register() {
               emailError = true;
             }
             return (
-              <label className="register__errors__item" key={index}>
+              <label className="register__errors" key={index}>
                 {i.field}: {i.error}
               </label>
             );

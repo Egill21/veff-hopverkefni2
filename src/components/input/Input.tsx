@@ -9,6 +9,7 @@ interface props {
   text: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
+  value?: string;
 }
 
 export default function Input(props: props) {
@@ -29,6 +30,7 @@ export default function Input(props: props) {
           onChange={props.onChange}
           type={props.type}
           name={props.name}
+          value={props.value}
           className={
             props.error !== true ? 'input__input' : 'input__input--error'
           }
