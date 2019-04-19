@@ -12,6 +12,16 @@
     @include columns(8);
     @include offset-left(2);
     margin-bottom: $gutter;
+
+    @media (max-width: 1000px) {
+      @include columns(10);
+      @include offset-left(1);
+    }
+
+    @media (max-width: 800px) {
+      @include columns(12);
+      @include offset-left(0);
+    }
   }
 
   &__heading {
@@ -20,12 +30,9 @@
   }
 
   &__userinfo {
-    // @include columns(8);
-    font-family: $font-main;
-    margin-bottom: $gutter;
-    margin-right: $gutter*8;
     display: flex;
-    justify-content: space-between;
+    margin-bottom: $gutter;
+    font-family: $font-main;
 
     &--label {
       display: flex;
@@ -33,6 +40,9 @@
       font-weight: bold;
     }
 
+    &--data {
+      margin-left: $gutter * 4;
+    }
   }
 
   &__table {

@@ -52,7 +52,7 @@ export default function Register() {
         {errors &&
           errors.map((i: IFieldError, index: number) => {
             return (
-              <label className="register__errors__item" key={index}>
+              <label className="register__errors" key={index}>
                 {i.field}: {i.error}
               </label>
             );
