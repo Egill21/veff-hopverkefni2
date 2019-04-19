@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-=======
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
->>>>>>> 4f8b7c06368c12b86988a13b36d48c78a006e96a
 
 import Home from "../home/Home";
 import Button from "./../../components/button/Button";
