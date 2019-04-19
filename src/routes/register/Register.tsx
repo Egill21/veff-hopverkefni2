@@ -1,5 +1,6 @@
 import React, { Children, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import { post2 } from '../../api/index';
 import { IFieldError } from '../../api/types';
@@ -50,6 +51,7 @@ export default function Register() {
 
   return (
     <React.Fragment>
+      <Helmet title="Nýskráning" />
       <div className="register__col">
         <h1 className="register__title">Nýskráning</h1>
         {errors &&

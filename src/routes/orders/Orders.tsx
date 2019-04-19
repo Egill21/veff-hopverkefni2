@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Helmet from "react-helmet";
 
 import Userorders from "../../components/userorders/Userorders";
 import { Context } from "../../User";
@@ -15,7 +16,10 @@ export default function Orders() {
           );
         } else {
           return (
-            <Userorders token={token} />
+            <Fragment>
+              <Helmet title="Pantanir" />
+              <Userorders token={token} />
+            </Fragment>
           );
         }
       }}

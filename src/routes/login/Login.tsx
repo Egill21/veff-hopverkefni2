@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import Home from '../home/Home';
@@ -39,6 +40,7 @@ export default function Login() {
         }
         return (
           <Fragment>
+            <Helmet title="Innskráning" />
             <div className="login__col">
               <h1 className="login__title">Innskráning</h1>
               {message &&
