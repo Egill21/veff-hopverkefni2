@@ -1,21 +1,41 @@
-import React from "react";
+import React from 'react';
 
-import "./Input.scss";
+import './Input.scss';
 
-interface props { // tslint:disable-line
+interface props {
+  // tslint:disable-line
   name: string;
   type: string;
   text: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean;
+  value?: string;
 }
 
-export default function Input(props: props) { // tslint:disable-line
+export default function Input(props: props) {
+  console.log(props.error !== true);
+  // tslint:disable-line
   return (
     <React.Fragment>
       <div className="input__container">
-        <label htmlFor={props.name} className="input__label">{props.text}</label>
-        <input onChange={props.onChange} type={props.type} name={props.name} className="input__input" />
+        <label
+          htmlFor={props.name}
+          className={
+            props.error !== true ? 'input__label' : 'input__label--error'
+          }
+        >
+          {props.text}
+        </label>
+        <input
+          onChange={props.onChange}
+          type={props.type}
+          name={props.name}
+          value={props.value}
+          className={
+            props.error !== true ? 'input__input' : 'input__input--error'
+          }
+        />
       </div>
-    </React.Fragment >
+    </React.Fragment>
   );
 }
