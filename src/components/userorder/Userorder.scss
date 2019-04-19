@@ -29,6 +29,11 @@
     margin-bottom: $gutter;
   }
 
+  &__loading {
+    font-family: $font-heading;
+    margin-top: $gutter;
+  }
+
   &__userinfo {
     display: flex;
     margin-bottom: $gutter;
