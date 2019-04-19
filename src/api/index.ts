@@ -4,9 +4,12 @@ import {
   ICategories,
   ICategory,
   IErrorArray,
+  ILogInInfo,
+  IOrder,
   IOrders,
   IProduct,
   IProducts,
+  ISingleError,
 } from "./types";
 
 // Sækja slóð á API úr env
@@ -94,14 +97,18 @@ async function getCategories(): Promise<Array<ICategory> | null> { // tslint:dis
   return cats.items;
 }
 
-async function getCategory(id: number): Promise<ICategory | null> {
+async function getCategory(id: number): Promise<ICategory | string> {
   const url = new URL(`${baseurl}categories/${id}`);
   const response = await fetch(url.href);
 
-  if (!response.ok) {
-    return null;
+  if (response.status === 200) {
+    return response.json();
   }
-  return response.json();
+
+  if (response.status === 404) {
+    return "Not Found";
+  }
+  return "Error";
 }
 
 async function login(
@@ -119,6 +126,30 @@ async function login(
   });
 
   return response.json();
+
+  /*   const status: number = response.status;
+    console.log('TCL: status', status);
+
+    const temp: any = await response.json();
+
+    if (status !== 200) {
+      if (!temp.errors.length) {
+        temp.errors.field = "Username";
+        return {
+          errors: [temp],
+          loggedin: false,
+        };
+      }
+      return {
+        errors: temp,
+        loggedin: false,
+      };
+    }
+
+    const info: ILogInInfo = temp;
+    info.loggedin = true;
+
+    return info; */
 }
 
 async function post2(addUrl: string, data?: object) {

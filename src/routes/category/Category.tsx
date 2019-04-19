@@ -4,6 +4,8 @@ import Helmet from "react-helmet";
 import { getCategory, getPagedProducts } from "../../api/index";
 import { ICategory, IProducts } from "../../api/types";
 
+import Error from "../../routes/system-pages/Error";
+
 import Products from "../../components/products/Products";
 
 import "./Category.scss";
@@ -20,13 +22,22 @@ export default function Category(props: any) {
   const [inputBox, setInputBox] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [isNotFound, setisNotFound] = useState<boolean>(false);
+  const [isError, setError] = useState<boolean>(false);
 
   async function fetchData() {
     setLoading(true);
-    const myProducts: IProducts | null = await getPagedProducts({categoryID});
-    const myCategory: ICategory | null = await getCategory(categoryID);
-    setProducts(myProducts);
-    setCategory(myCategory);
+    const myCategory: any = await getCategory(categoryID);
+
+    if (myCategory === "Not Found") {
+      setisNotFound(true);
+    } else if (myCategory === "Error") {
+      setError(true);
+    } else {
+      setCategory(myCategory);
+      const myProducts: IProducts | null = await getPagedProducts({categoryID});
+      setProducts(myProducts);
+    }
     setLoading(false);
   }
 
@@ -60,6 +71,16 @@ export default function Category(props: any) {
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (isNotFound) {
+    const error: string = "Flokkur fannst ekki";
+    return <Error type="Not Found" errorMSG={error} />;
+  }
+
+  if (isError) {
+    const error: string = "Eitthvað fór úrskeiðis";
+    return <Error type="Error" errorMSG={error} />;
+  }
 
   return (
     <div className="category">
