@@ -86,12 +86,10 @@ export default function Cart(props: { token: string }) {
 
   function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
-    console.log('TCL: onNameChange -> e.target.value', e.target.value); // tslint:disable-line
   }
 
   function onAddressChange(e: React.ChangeEvent<HTMLInputElement>) {
     setAddress(e.target.value);
-    console.log('TCL: onAddressChange -> e.target.value', e.target.value); // tslint:disable-line
   }
 
   useEffect(() => {
