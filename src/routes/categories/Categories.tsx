@@ -4,6 +4,8 @@ import { getCategories } from "../../api/index";
 import { ICategory } from "../../api/types";
 import Categories from "../../components/categories/Categories";
 
+import '../../components/categories/Categories.scss';
+
 export default function CategoriesRoute() {
 
   const [categories, setCategories] = useState<Array<ICategory> | null>([]); // tslint:disable-line
@@ -23,7 +25,7 @@ export default function CategoriesRoute() {
   return (
     <Fragment>
       {loading &&
-        <p>Hleð gögnum...</p>
+        <h2 className="loading">Sæki flokka...</h2>
       }
       {!loading &&
         <div className="categories">

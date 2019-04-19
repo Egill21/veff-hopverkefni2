@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <Context.Consumer>
-      {({ loggoutUser, user }) => {
+      {({ loggoutUser, user }) => { // tslint:disable-line
         return (
           <header className="header">
             <div className="header__content">

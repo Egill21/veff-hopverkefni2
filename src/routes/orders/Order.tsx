@@ -12,7 +12,7 @@ export default function Order(props: any) {
 
   return (
     <Context.Consumer>
-      {({ token }) => {
+      {({ token }) => { // tslint:disable-line
         if (!token) {
           return (<NoAccess />);
         } else {
